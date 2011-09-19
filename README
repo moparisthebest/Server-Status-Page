@@ -1,0 +1,74 @@
+PHP Server Status Page
+======================
+Allow users to post their servers and keep track of uptime,
+votes, and more with this simple and extensible PHP script.
+
+Author: Travis Burtrum (moparisthebest)
+Email: admin@moparisthebest.com
+
+Originally written for: https://www.moparscape.org/serverstatus.php
+I plan to keep the repository up to date with the currently running
+code at all times.
+
+Features:
+----------------------
+1. Integration with SMF forum, but extensible to other forums as well.
+2. Premium (Sponsored) server support.
+3. Layout entirely configurable from CSS.
+4. Full WYSIWYG editor and bbcode support thanks to SMF.
+5. IP owner verification.
+6. Voting support.
+7. Dynamic status images, with clean URL support.
+8. Can sort by all meaningful table columns.
+9. Uses MySQLi.
+10. Search powered by the fast Sphinx Search Server.
+
+How to make it work:
+----------------------
+1. edit the database details in ss_sources/util.php
+2. create databases by importing database.sql
+3. Setup sphinx server if you want search.
+4. Fix all /path/to/smf/ links (there are 3).
+5. If you want clean URLs to work with the dynamic status images,
+you must create the relevant URL rewrite.
+6. Compile and set up the (extremely poorley written) ServerChecker.java
+to automatically approve and check the status of servers as a cronjob.
+7. Run it, I suggest Lighttpd+FastCGI.
+
+How to comply with License:
+----------------------
+Basically, the AGPL requires that if you distribute the code,
+or if you host the application where the public can access it,
+such as a public server status page, then you must provide the
+source code along with your modifications as a download on that
+page.  This is to promote development of the program and share
+code with everyone to improve it.  If you have any questions, 
+contact me at admin@moparisthebest.com.  If you use the code, 
+I'd love to know, so drop me a line if you would.
+
+License: (full text in agpl-3.0.txt)
+----------------------
+MoparScape.org server status page
+Copyright (C) 2011  Travis Burtrum (moparisthebest)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+TODO:
+----------------------
+1. Split configuration options off into seperate non-tracked file.
+2. Re-write ServerChecker.java completely.
+3. Embedded youtube support?
+4. You suggest it!  Or better yet send me a pull request or patch!
+
+
