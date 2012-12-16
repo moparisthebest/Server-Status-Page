@@ -1,23 +1,23 @@
-PHP Server Status Page
-======================
+PHP Server Status Page v0.5
+===========================
 Allow users to post their servers and keep track of uptime,
 votes, and more with this simple and extensible PHP script.
 
 Author: Travis Burtrum (moparisthebest)
 Email: admin@moparisthebest.com
 
-Originally written for: https://www.moparscape.org/serverstatus.php
+Originally written for: http://www.moparscape.org/serverstatus.php
 I plan to keep the repository up to date with the currently running
 code at all times.
 
 Features:
 ----------------------
-1. Integration with SMF forum, but extensible to other forums as well.
+1. Integration with SMF forum, but extensible to other forums as well (check ss_sources/forums/).
 2. Premium (Sponsored) server support.
-3. Layout entirely configurable from CSS.
+3. Layout entirely configurable from CSS (theme support in ss_sources/themes/).
 4. Full WYSIWYG editor and bbcode support thanks to SMF.
 5. IP owner verification.
-6. Voting support.
+6. Voting support. (with optional ReCaptcha verification)
 7. Dynamic status images, with clean URL support.
 8. Can sort by all meaningful table columns.
 9. Uses MySQLi.
@@ -25,15 +25,21 @@ Features:
 
 How to make it work:
 ----------------------
-1. edit the database details in ss_sources/util.php
-2. create databases by importing database.sql
+1. Copy ss_sources/copy_edit_me.php to where you want the script to run
+(like /serverstatus.php) and fill in all config details. You can copy
+to multiple locations with different details to run multiple instances
+of the application with the same codebase.
+2. Create databases by importing database.sql
 3. Setup sphinx server if you want search.
-4. Fix all /path/to/smf/ links (there are 3).
-5. If you want clean URLs to work with the dynamic status images,
-you must create the relevant URL rewrite.
-6. Compile and set up the (extremely poorley written) ServerChecker.java
+4. If you want clean URLs to work with the dynamic status images,
+you must create the relevant URL rewrite. In lighttpd, it looks like this:
+    url.rewrite-once = (
+    "^/serverstatus/([^/]*)\.png$" => "/serverstatus.php?action=image&server=$1",
+    "^/serverstatus/([^/]*)/([^/]*)\.png$" => "/serverstatus.php?action=image&scale=$1&server=$2",
+    )
+5. Compile and set up the (extremely poorly written) ServerChecker.java
 to automatically approve and check the status of servers as a cronjob.
-7. Run it, I suggest Lighttpd+FastCGI.
+6. Run it, I suggest Lighttpd+FastCGI.
 
 How to comply with License:
 ----------------------
@@ -64,11 +70,13 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Files not written by me with their own license, and download links:
+recaptchalib.php: (MIT)  http://code.google.com/p/recaptcha/downloads/list?q=label:phplib-Latest
+sphinxapi.php   : (GPL)  http://code.google.com/p/sphinxsearch/source/browse/trunk/api/sphinxapi.php
+tbszip.php      : (LGPL) http://www.tinybutstrong.com/dl.php?f=tbszip.zip&s=2
+
 TODO:
 ----------------------
-1. Split configuration options off into seperate non-tracked file.
-2. Re-write ServerChecker.java completely.
-3. Embedded youtube support?
-4. You suggest it!  Or better yet send me a pull request or patch!
-
-
+1. Re-write ServerChecker.java completely. (partially complete, calls for re-factor of database structure)
+2. Embedded youtube support?
+3. You suggest it!  Or better yet send me a pull request or patch!

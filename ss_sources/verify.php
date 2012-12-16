@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 if (!defined('SS_PAGE'))
-	die('Hacking attempt...');
+    die(highlight_file(__FILE__, true));
 
 function verify(){
 	header("Content-type: text/plain");
@@ -92,7 +92,8 @@ Password: $rs_pass\n
 to make sure it is online, and if successful, it will be posted.";
 	}else{
 		writeToFile("strange failure");
-		echo "Strange failure, PM Moparisthebest on the forums to with details so he can fix it.\n";
+        global $g_admin_contact;
+		echo "Strange failure, PM ".strip_tags($g_admin_contact)." on the forums to with details so he can fix it.\n";
 	}
 	$stmt->close();
 

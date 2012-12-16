@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 if (!defined('SS_PAGE'))
-	die('Hacking attempt...');
+    die(highlight_file(__FILE__, true));
 
 function register2(){
 	forceLogin('register');
@@ -99,7 +99,8 @@ function register2(){
 		}
 		// make sure user and IP is not banned
 		if (checkRows("SELECT `id` FROM `banned` WHERE `ip` = ? OR `uid` = ?", 'si', $ip, $uid)) {
-			error("This server has been banned, contact moparisthebest on the forums for assistance.");
+            global $g_admin_contact;
+			error("This server has been banned, contact $g_admin_contact on the forums for assistance.");
 			return;
 		}
 		// we know another server hasn't been posted by this user, because we would be in edit
@@ -118,7 +119,7 @@ function register2(){
 		$verified = 1;
 		if(!verifyIP($ip, &$resolved_ip, &$remote_ip)){
 			$verified = 0;
-			global $thispage;
+			global $thispage, $g_admin_contact;
 			$verify_url = $thispage."?action=verify&amp;server=$ip&amp;key=$key";
 			$verify_msg = "<br />The server you posted, $ip, resolves to $resolved_ip, which does not match your ip, $remote_ip.\n<br />
 				This means that you must verify that you own this IP by visiting this URL from the IP that you posted.<br />
@@ -127,10 +128,10 @@ function register2(){
 				If you only have a command line, visit the URL with wget, curl, or an equivalent command to this:<br />
 				<div class=\"codeheader\">Code:</div><div class=\"code\"><pre style=\"margin-top: 0; display: inline;\">wget -O- -q \"$verify_url\"</pre></div><br />
 				The message you recieve will tell you if verification was successful.<br />
-				If you have problems with this, PM Moparisthebest on the forums.";
+				If you have problems with this, PM $g_admin_contact on the forums.";
 		}
 		
-		global $uname;
+		global $uname, $g_admin_contact;
 		// don't bother with pic_url, they can edit it if they are sponsored
 		$sql = 'INSERT INTO `toadd` (`uid`, `uname`, `name`, `ip`, `port`, `version`, `time`, `info`, `ipaddress`, `rs_name`, `rs_pass`, `key`, `verified`) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 		$stmt = $g_mysqli->prepare($sql) or debug($g_mysqli->error);
@@ -141,7 +142,7 @@ Password: <strong class=\"highlight\">$rs_pass</strong>\n<br />
 to make sure it is online, and if successful, it will be posted.  <br />
 You must register this username and password for me on your server and allow it to be logged into from the IP 69.39.224.55<br />
 The server will be deleted from the queue if not verified and logged into within 24 hours of posting.<br />".$verify_msg;
-		$fail_msg = 'Registration failed, PM <a href="http://www.moparscape.org/smf/index.php?action=profile;u=1">Moparisthebest</a> on the forums to with details so he can fix it.';
+		$fail_msg = 'Registration failed, PM '.$g_admin_contact.' on the forums to with details so he can fix it.';
 	}
 	
 	// execute the query
@@ -279,9 +280,9 @@ function echoPostForm($edit = null){
 }
 
 function echoForm($name, $ip, $port, $version, $message, $pic_url, $edit = false){
-	global $g_versions;
+	global $g_versions, $g_img_dir;
 	if(isset($name))
-		censorText($name);
+        censor($name);
 	$preview_message = $message;
 	if(isset($preview_message)){
 		// Do all bulletin board code tags, with smileys.
@@ -293,7 +294,7 @@ function echoForm($name, $ip, $port, $version, $message, $pic_url, $edit = false
         <?php echo $preview_message; ?>
         </div>
 
-      <form action="<?php echo actionURL('register2'); ?>" method="post" id="postmodify" onsubmit="submitonce(this);saveEntities();" enctype="multipart/form-data" style="margin: 0;">
+      <form action="<?php echo actionURL('register2'); ?>" method="post" id="postmodify" onsubmit="submitonce(this);saveEntities();" enctype="multipart/form-data">
 	<fieldset>
         <table class="other" summary="Register your Server">
           <caption>
@@ -376,68 +377,68 @@ foreach($g_versions as $v)
 	      <a href="javascript:void(0);" onclick=
               "surroundText('[b]', '[/b]', document.forms.postmodify.message); return false;"><img onmouseover="bbc_highlight(this, true);"
               onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/bold.gif" width="23" height="22" alt="Bold" title=
+              "<?php echo $g_img_dir; ?>/bbc/bold.gif" width="23" height="22" alt="Bold" title=
               "Bold" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
               onclick="surroundText('[i]', '[/i]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/italicize.gif" width="23" height="22" alt=
+              "<?php echo $g_img_dir; ?>/bbc/italicize.gif" width="23" height="22" alt=
               "Italicized" title="Italicized" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
               onclick="surroundText('[u]', '[/u]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/underline.gif" width="23" height="22" alt=
+              "<?php echo $g_img_dir; ?>/bbc/underline.gif" width="23" height="22" alt=
               "Underline" title="Underline" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
               onclick="surroundText('[s]', '[/s]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/strike.gif" width="23" height="22" alt=
+              "<?php echo $g_img_dir; ?>/bbc/strike.gif" width="23" height="22" alt=
               "Strikethrough" title="Strikethrough" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><img src="http://www.moparscape.org/images/bbc/divider.gif"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><img src="<?php echo $g_img_dir; ?>/bbc/divider.gif"
               alt="|" style="margin: 0 3px 0 3px;" /><a href="javascript:void(0);" onclick=
               "surroundText('[shadow=red,left]', '[/shadow]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/shadow.gif" width="23" height="22" alt="Shadow"
+              "<?php echo $g_img_dir; ?>/bbc/shadow.gif" width="23" height="22" alt="Shadow"
               title="Shadow" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><img src="http://www.moparscape.org/images/bbc/divider.gif"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><img src="<?php echo $g_img_dir; ?>/bbc/divider.gif"
               alt="|" style="margin: 0 3px 0 3px;" /><a href="javascript:void(0);" onclick=
               "surroundText('[pre]', '[/pre]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/pre.gif" width="23" height="22" alt=
+              "<?php echo $g_img_dir; ?>/bbc/pre.gif" width="23" height="22" alt=
               "Preformatted Text" title="Preformatted Text" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
               onclick="surroundText('[left]', '[/left]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/left.gif" width="23" height="22" alt="Left Align"
+              "<?php echo $g_img_dir; ?>/bbc/left.gif" width="23" height="22" alt="Left Align"
               title="Left Align" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
               onclick="surroundText('[center]', '[/center]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/center.gif" width="23" height="22" alt="Centered"
+              "<?php echo $g_img_dir; ?>/bbc/center.gif" width="23" height="22" alt="Centered"
               title="Centered" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
               onclick="surroundText('[right]', '[/right]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/right.gif" width="23" height="22" alt=
+              "<?php echo $g_img_dir; ?>/bbc/right.gif" width="23" height="22" alt=
               "Right Align" title="Right Align" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><img src="http://www.moparscape.org/images/bbc/divider.gif"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><img src="<?php echo $g_img_dir; ?>/bbc/divider.gif"
               alt="|" style="margin: 0 3px 0 3px;" /><a href="javascript:void(0);" onclick=
               "replaceText('[hr]', document.forms.postmodify.message); return false;"><img onmouseover="bbc_highlight(this, true);"
               onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/hr.gif" width="23" height="22" alt=
+              "<?php echo $g_img_dir; ?>/bbc/hr.gif" width="23" height="22" alt=
               "Horizontal Rule" title="Horizontal Rule" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><img src="http://www.moparscape.org/images/bbc/divider.gif"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><img src="<?php echo $g_img_dir; ?>/bbc/divider.gif"
               alt="|" style="margin: 0 3px 0 3px;" /><a href="javascript:void(0);" onclick=
               "surroundText('[size=10pt]', '[/size]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/size.gif" width="23" height="22" alt="Font Size"
+              "<?php echo $g_img_dir; ?>/bbc/size.gif" width="23" height="22" alt="Font Size"
               title="Font Size" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
               onclick="surroundText('[font=Verdana]', '[/font]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/face.gif" width="23" height="22" alt="Font Face"
+              "<?php echo $g_img_dir; ?>/bbc/face.gif" width="23" height="22" alt="Font Face"
               title="Font Face" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a>
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a>
               <select onchange=
               "surroundText('[color=' + this.options[this.selectedIndex].value.toLowerCase() + ']', '[/color]', document.forms.postmodify.message); this.selectedIndex = 0; document.forms.postmodify.message.focus(document.forms.postmodify.message.caretPos);"
               style="margin-bottom: 1ex;">
@@ -490,73 +491,73 @@ foreach($g_versions as $v)
               <a href="javascript:void(0);" onclick=
               "surroundText('[img]', '[/img]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/img.gif" width="23" height="22" alt="Insert Image"
+              "<?php echo $g_img_dir; ?>/bbc/img.gif" width="23" height="22" alt="Insert Image"
               title="Insert Image" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
               onclick="surroundText('[url]', '[/url]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/url.gif" width="23" height="22" alt=
+              "<?php echo $g_img_dir; ?>/bbc/url.gif" width="23" height="22" alt=
               "Insert Hyperlink" title="Insert Hyperlink" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
               onclick="surroundText('[email]', '[/email]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/email.gif" width="23" height="22" alt=
+              "<?php echo $g_img_dir; ?>/bbc/email.gif" width="23" height="22" alt=
               "Insert Email" title="Insert Email" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
               onclick="surroundText('[ftp]', '[/ftp]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/ftp.gif" width="23" height="22" alt=
+              "<?php echo $g_img_dir; ?>/bbc/ftp.gif" width="23" height="22" alt=
               "Insert FTP Link" title="Insert FTP Link" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><img src="http://www.moparscape.org/images/bbc/divider.gif"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><img src="<?php echo $g_img_dir; ?>/bbc/divider.gif"
               alt="|" style="margin: 0 3px 0 3px;" /><a href="javascript:void(0);" onclick=
               "surroundText('[table]', '[/table]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/table.gif" width="23" height="22" alt=
+              "<?php echo $g_img_dir; ?>/bbc/table.gif" width="23" height="22" alt=
               "Insert Table" title="Insert Table" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
               onclick="surroundText('[tr]', '[/tr]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/tr.gif" width="23" height="22" alt=
+              "<?php echo $g_img_dir; ?>/bbc/tr.gif" width="23" height="22" alt=
               "Insert Table Row" title="Insert Table Row" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
               onclick="surroundText('[td]', '[/td]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/td.gif" width="23" height="22" alt=
+              "<?php echo $g_img_dir; ?>/bbc/td.gif" width="23" height="22" alt=
               "Insert Table Column" title="Insert Table Column" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><img src="http://www.moparscape.org/images/bbc/divider.gif"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><img src="<?php echo $g_img_dir; ?>/bbc/divider.gif"
               alt="|" style="margin: 0 3px 0 3px;" /><a href="javascript:void(0);" onclick=
               "surroundText('[sup]', '[/sup]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/sup.gif" width="23" height="22" alt="Superscript"
+              "<?php echo $g_img_dir; ?>/bbc/sup.gif" width="23" height="22" alt="Superscript"
               title="Superscript" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
               onclick="surroundText('[sub]', '[/sub]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/sub.gif" width="23" height="22" alt="Subscript"
+              "<?php echo $g_img_dir; ?>/bbc/sub.gif" width="23" height="22" alt="Subscript"
               title="Subscript" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
               onclick="surroundText('[tt]', '[/tt]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/tele.gif" width="23" height="22" alt="Teletype"
+              "<?php echo $g_img_dir; ?>/bbc/tele.gif" width="23" height="22" alt="Teletype"
               title="Teletype" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><img src="http://www.moparscape.org/images/bbc/divider.gif"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><img src="<?php echo $g_img_dir; ?>/bbc/divider.gif"
               alt="|" style="margin: 0 3px 0 3px;" /><a href="javascript:void(0);" onclick=
               "surroundText('[code]', '[/code]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/code.gif" width="23" height="22" alt="Insert Code"
+              "<?php echo $g_img_dir; ?>/bbc/code.gif" width="23" height="22" alt="Insert Code"
               title="Insert Code" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><a href="javascript:void(0);"
               onclick="surroundText('[quote]', '[/quote]', document.forms.postmodify.message); return false;"><img onmouseover=
               "bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/quote.gif" width="23" height="22" alt=
+              "<?php echo $g_img_dir; ?>/bbc/quote.gif" width="23" height="22" alt=
               "Insert Quote" title="Insert Quote" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><img src="http://www.moparscape.org/images/bbc/divider.gif"
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a><img src="<?php echo $g_img_dir; ?>/bbc/divider.gif"
               alt="|" style="margin: 0 3px 0 3px;" /><a href="javascript:void(0);" onclick=
               "surroundText('[list]\n[li]', '[/li]\n[li][/li]\n[/list]', document.forms.postmodify.message); return false;"><img onmouseover="bbc_highlight(this, true);"
               onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);" src=
-              "http://www.moparscape.org/images/bbc/list.gif" width="23" height="22" alt="Insert List"
+              "<?php echo $g_img_dir; ?>/bbc/list.gif" width="23" height="22" alt="Insert List"
               title="Insert List" style=
-              "background-image: url(http://www.moparscape.org/images/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a>
+              "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></a>
             </td>
           </tr>
 
@@ -565,31 +566,31 @@ foreach($g_versions as $v)
 
             <td valign="middle"><a href="javascript:void(0);" onclick=
             "replaceText(' :)', document.forms.postmodify.message); return false;"><img src=
-            "http://www.moparisthebest.com/smf/Smileys/vb/smile.gif" alt="Smiley" title="Smiley" /></a> <a href=
+            "<?php echo $g_img_dir; ?>/bbc/smileys/smile.gif" alt="Smiley" title="Smiley" /></a> <a href=
             "javascript:void(0);" onclick="replaceText(' ;)', document.forms.postmodify.message); return false;"><img src=
-            "http://www.moparisthebest.com/smf/Smileys/vb/wink.gif" alt="Wink" title="Wink" /></a> <a href=
+            "<?php echo $g_img_dir; ?>/bbc/smileys/wink.gif" alt="Wink" title="Wink" /></a> <a href=
             "javascript:void(0);" onclick="replaceText(' :D', document.forms.postmodify.message); return false;"><img src=
-            "http://www.moparisthebest.com/smf/Smileys/vb/biggrin.gif" alt="Big Grin" title="Big Grin" /></a> <a href=
+            "<?php echo $g_img_dir; ?>/bbc/smileys/biggrin.gif" alt="Big Grin" title="Big Grin" /></a> <a href=
             "javascript:void(0);" onclick="replaceText(' :mad:', document.forms.postmodify.message); return false;"><img src=
-            "http://www.moparisthebest.com/smf/Smileys/vb/mad.gif" alt="Mad" title="Mad" /></a> <a href="javascript:void(0);"
+            "<?php echo $g_img_dir; ?>/bbc/smileys/mad.gif" alt="Mad" title="Mad" /></a> <a href="javascript:void(0);"
             onclick="replaceText(' :(', document.forms.postmodify.message); return false;"><img src=
-            "http://www.moparisthebest.com/smf/Smileys/vb/frown.gif" alt="Sad" title="Sad" /></a> <a href=
+            "<?php echo $g_img_dir; ?>/bbc/smileys/frown.gif" alt="Sad" title="Sad" /></a> <a href=
             "javascript:void(0);" onclick="replaceText(' :eek:', document.forms.postmodify.message); return false;"><img src=
-            "http://www.moparisthebest.com/smf/Smileys/vb/eek.gif" alt="Shocked" title="Shocked" /></a> <a href=
+            "<?php echo $g_img_dir; ?>/bbc/smileys/eek.gif" alt="Shocked" title="Shocked" /></a> <a href=
             "javascript:void(0);" onclick="replaceText(' :cool:', document.forms.postmodify.message); return false;"><img src=
-            "http://www.moparisthebest.com/smf/Smileys/vb/cool.gif" alt="Cool" title="Cool" /></a> <a href=
+            "<?php echo $g_img_dir; ?>/bbc/smileys/cool.gif" alt="Cool" title="Cool" /></a> <a href=
             "javascript:void(0);" onclick="replaceText(' :rolleyes:', document.forms.postmodify.message); return false;"><img src=
-            "http://www.moparisthebest.com/smf/Smileys/vb/rolleyes.gif" alt="Roll Eyes" title="Roll Eyes" /></a> <a href=
+            "<?php echo $g_img_dir; ?>/bbc/smileys/rolleyes.gif" alt="Roll Eyes" title="Roll Eyes" /></a> <a href=
             "javascript:void(0);" onclick="replaceText(' :P', document.forms.postmodify.message); return false;"><img src=
-            "http://www.moparisthebest.com/smf/Smileys/vb/tongue.gif" alt="Tongue" title="Tongue" /></a> <a href=
+            "<?php echo $g_img_dir; ?>/bbc/smileys/tongue.gif" alt="Tongue" title="Tongue" /></a> <a href=
             "javascript:void(0);" onclick="replaceText(' :o', document.forms.postmodify.message); return false;"><img src=
-            "http://www.moparisthebest.com/smf/Smileys/vb/redface.gif" alt="Embarrassed" title="Embarrassed" /></a> <a href=
+            "<?php echo $g_img_dir; ?>/bbc/smileys/redface.gif" alt="Embarrassed" title="Embarrassed" /></a> <a href=
             "javascript:void(0);" onclick="replaceText(' :confused:', document.forms.postmodify.message); return false;"><img src=
-            "http://www.moparisthebest.com/smf/Smileys/vb/confused.gif" alt="Confused" title="Confused" /></a> <a href=
+            "<?php echo $g_img_dir; ?>/bbc/smileys/confused.gif" alt="Confused" title="Confused" /></a> <a href=
             "javascript:void(0);" onclick="replaceText(' :|', document.forms.postmodify.message); return false;"><img src=
-            "http://www.moparisthebest.com/smf/Smileys/vb/shifty.gif" alt="shifty" title="shifty" /></a> <a href=
+            "<?php echo $g_img_dir; ?>/bbc/smileys/shifty.gif" alt="shifty" title="shifty" /></a> <a href=
             "javascript:void(0);" onclick="replaceText(' ;D', document.forms.postmodify.message); return false;"><img src=
-            "http://www.moparisthebest.com/smf/Smileys/vb/winkgrin.gif" alt="winksmile" title="winksmile" /></a></td>
+            "<?php echo $g_img_dir; ?>/bbc/smileys/winkgrin.gif" alt="winksmile" title="winksmile" /></a></td>
           </tr>
 
           <tr>

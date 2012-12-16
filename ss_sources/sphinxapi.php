@@ -1,5 +1,8 @@
 <?php
 
+if (!defined('SS_PAGE'))
+    die(highlight_file(__FILE__, true));
+
 //
 // $Id: sphinxapi.php 2055 2009-11-06 23:09:58Z shodan $
 //

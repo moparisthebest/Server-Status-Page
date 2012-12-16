@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 if (!defined('SS_PAGE'))
-	die('Hacking attempt...');
+    die(highlight_file(__FILE__, true));
 
 function view(){
 	//echo 'this is view';
 	mysql_con();
-	global $g_mysqli;
+	global $g_mysqli, $g_img_dir;
 	$stmt = $g_mysqli->prepare('SELECT `name`, `pic_url`, `uid`, `uname`, `ip`, `port`, `version`, `uptime`, `time`, `info`, `online`, `sponsored`, `vote` FROM `servers` WHERE `ip` = ? LIMIT 1') or debug($g_mysqli->error);
 	$stmt->bind_param("s", $_GET['server']);
 	$stmt->execute();
@@ -36,14 +36,8 @@ function view(){
 	$stmt->close();
 	close_mysql();
 
-	if($online == 1){
-		$link = "http://www.moparscape.org/index.php?server=%s&amp;port=%s&amp;version=%s&amp;detail=";
-		$link = sprintf($link, $ip, $port, $version);
-		$play = '<a href="%s0">High</a> / <a href="%s1">Low</a>';
-		$play = sprintf($play, $link, $link);
-	}else{
-		$play = '<div class="offline">Server Offline!</div>';
-	}
+    // todo: common code to generate table here as in display.php
+    $play = echoPlay($online, $ip, $port, $version);
 
 	$info = bb2html($info);
 
@@ -98,7 +92,7 @@ function selectText()
 
     <table class="<?php echo ($spons == 0) ? 'other' : 'spons'; ?>" summary="<?php echo $name; ?>">
       <caption>
-      <?php echo ($pic_url != '') ? '<img src="'.$pic_url.'" alt="'.$name.'" width="185" height="25" />' : $name; ?>
+      <?php echo ($pic_url != '' && $spons != 0) ? '<img src="'.$pic_url.'" alt="'.$name.'" width="185" height="25" />' : $name; ?>
       </caption>
       <thead>
         <tr>
@@ -136,11 +130,11 @@ function selectText()
           <td><?php echo $ip; ?></td>
           <td><?php echo $port; ?></td>
           <td><?php echo $version; ?></td>
-          <td><a href="http://www.moparscape.org/smf/index.php?action=profile;u=<?php echo $uid; ?>"><?php echo $uname; ?></a></td>
+          <td><a href="<?php echo urlForUid($uid); ?>"><?php echo $uname; ?></a></td>
           <td><?php echo $uptime; ?>%</td>
           <td><?php echo date("m-d-y", $time); ?></td>
           <td><?php echo ($votes > 0) ?  '+'.$votes: $votes; ?></td>
-          <td><a href="<?php echo $thispage ?>?action=up&amp;server=<?php echo $ip ?>"><img src="http://<?php echo $_SERVER['SERVER_NAME']; ?>/images/up.png" alt="Up" /></a><a href="<?php echo $thispage ?>?action=down&amp;server=<?php echo $ip ?>"><img src="http://<?php echo $_SERVER['SERVER_NAME']; ?>/images/down.png" alt="Down" /></a></td>
+          <td><a href="<?php echo $thispage ?>?action=up&amp;server=<?php echo $ip ?>"><img src="<?php echo $g_img_dir; ?>/up.png" alt="Up" /></a><a href="<?php echo $thispage ?>?action=down&amp;server=<?php echo $ip ?>"><img src="<?php echo $g_img_dir; ?>/down.png" alt="Down" /></a></td>
           <td><?php echo $play; ?></td>
 <?php
 	if(can_mod() && $spons == 0){

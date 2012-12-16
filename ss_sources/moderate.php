@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 if (!defined('SS_PAGE'))
-	die('Hacking attempt...');
+    die(highlight_file(__FILE__, true));
 
 function banServ(){
 	forceAdmin();
 
-	global $g_mysqli;
+	global $g_mysqli, $g_admin_contact;
 
 	mysql_con();
 
@@ -34,7 +34,7 @@ function banServ(){
 	// execute the query
 	$stmt->execute() or debug($g_mysqli->error);
 	if ($stmt->affected_rows != 1) {
-		echo 'Ban failed, is it a sponsored server?, PM <a href="http://www.moparscape.org/smf/index.php?action=profile;u=1">Moparisthebest</a> on the forums to with details so he can fix it.';
+		echo 'Ban failed, is it a sponsored server?, PM '.$g_admin_contact.' on the forums to with details so he can fix it.';
 		return;
 	}
 	$stmt->close();
@@ -45,7 +45,7 @@ function banServ(){
 function deleteServ(){
 	forceAdmin();
 
-	global $g_mysqli;
+	global $g_mysqli, $g_admin_contact;
 
 	mysql_con();
 
@@ -56,7 +56,7 @@ function deleteServ(){
 	// execute the query
 	$stmt->execute() or debug($g_mysqli->error);
 	if ($stmt->affected_rows != 1) {
-		echo 'Delete failed, is it a sponsored server?, PM <a href="http://www.moparscape.org/smf/index.php?action=profile;u=1">Moparisthebest</a> on the forums to with details so he can fix it.';
+		echo 'Delete failed, is it a sponsored server?, PM '.$g_admin_contact.' on the forums to with details so he can fix it.';
 		return;
 	}
 	$stmt->close();

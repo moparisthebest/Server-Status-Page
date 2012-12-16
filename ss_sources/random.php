@@ -1,4 +1,3 @@
-
 <?php
 /*
 MoparScape.org server status page
@@ -19,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 if (!defined('SS_PAGE'))
-	die('Hacking attempt...');
+    die(highlight_file(__FILE__, true));
 
 function random_page(){
 	mysql_con();

@@ -93,3 +93,15 @@ CREATE TABLE IF NOT EXISTS `toadd` (
   KEY `uid` (`uid`),
   KEY `online` (`online`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `log_voted`;
+CREATE TABLE IF NOT EXISTS `log_voted` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `uid` mediumint(8) unsigned NOT NULL,
+  `uname` varchar(80) NOT NULL,
+  `server_id` int(11) unsigned NOT NULL,
+  `time` int(10) unsigned NOT NULL,
+  `ip` varchar(15) NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `uid` (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;

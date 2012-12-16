@@ -17,22 +17,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-$script_name = '/serverstatus/';
-$script_name_len = strlen($script_name);
-/*
-function echoImage($online = -1){
-	if($online == 1)
-		$url = 'http://mopar.moparscape.org/images/online.gif';
-	elseif($online == 0)
-		$url = 'http://mopar.moparscape.org/images/offline.gif';
-	else
-		$url = 'http://mopar.moparscape.org/images/error.gif';
-	close_mysql();
-	header("Location: $url");
-	//echo("Location: $url");	debug_print_backtrace();
-	exit;
-}
-*/
+if (!defined('SS_PAGE'))
+    die(highlight_file(__FILE__, true));
 
 function scale(&$img, $scale) {
 	$width = imagesx($img) * $scale/100;
@@ -58,8 +44,13 @@ function centerImageString($image, $string, $font_size, $y){
 	imagestring($image, $font_size, $x, $y, $string, $color);
 }
 */
-function centerTtfString($image, $string, $font_size, $y, $font='./fonts/arial_bold.ttf'){
+function centerTtfString($image, $string, $font_size, $y, $font=null){
 	$color = imagecolorallocate($image, 199, 208, 227);
+
+    if($font == null){
+        global $g_source_dir;
+        $font=$g_source_dir.'/fonts/arial_bold.ttf';
+    }
 
 	$tb = imagettfbbox($font_size, 0, $font, $string);
 
@@ -69,13 +60,14 @@ function centerTtfString($image, $string, $font_size, $y, $font='./fonts/arial_b
 
 function echoImage($online = -1, $text = 'Error!', $size_req = ''){
 	close_mysql();
+    global $g_source_dir;
 
 	if($online == 1)
-		$file = '../images/online.png';
+		$file = $g_source_dir.'/fonts/online.png';
 	elseif($online == 0)
-		$file = '../images/offline.png';
+		$file = $g_source_dir.'/fonts/offline.png';
 	else
-		$file = '../images/error.png';
+		$file = $g_source_dir.'/fonts/error.png';
 
 	$im = imagecreatefrompng($file);
 //	the following not needed, since there is no more transparency in image
@@ -132,41 +124,30 @@ function echoImage($online = -1, $text = 'Error!', $size_req = ''){
 	exit;
 }
 
-define('SS_PAGE', 1);
-require_once('./util.php');
+function gen_image(){
 
-// if there is no URI, some error, so forward to error
-if (empty($_SERVER['REQUEST_URI']))
-	echoImage();
+    // if there is no server, some error, so forward to error
+    if (empty($_REQUEST['server']))
+        echoImage();
 
-// get the server, if there isn't one, forward to error
-if ( (substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '.'), 4) == '.png') && (substr($_SERVER['REQUEST_URI'], 0, $script_name_len) == $script_name) )
-	$server = substr($_SERVER['REQUEST_URI'], $script_name_len, strrpos($_SERVER['REQUEST_URI'], '.')-$script_name_len);
-else
-	echoImage();
+    $server = $_REQUEST['server'];
+    $size_req = $_REQUEST['scale'];
 
-// check if $server contains a size request, it would be before the /, the real ip after.
-$slash_pos = strpos($server, '/');
-if($slash_pos !== false){
-	$size_req = substr($server, 0, $slash_pos);
-	$server = substr($server, ++$slash_pos, strlen($server));
-}else
-	$size_req = '';
+    mysql_con();
+    global $g_mysqli;
+    $stmt = $g_mysqli->prepare('SELECT `online` FROM `servers` WHERE `ip` = ? LIMIT 1') or debug($g_mysqli->error);
+    $stmt->bind_param("s", $server);
+    $stmt->execute() or debug($g_mysqli->error);
+    // bind result variables
+    $stmt->bind_result($online);
 
-mysql_con();
-global $g_mysqli;
-$stmt = $g_mysqli->prepare('SELECT `online` FROM `servers` WHERE `ip` = ? LIMIT 1') or debug($g_mysqli->error);
-$stmt->bind_param("s", $server);
-$stmt->execute() or debug($g_mysqli->error);
-// bind result variables
-$stmt->bind_result($online);
+    // if there is no server in the database, forward to error
+    if(!$stmt->fetch())
+        echoImage(-1, $server, $size_req);
 
-// if there is no server in the database, forward to error
-if(!$stmt->fetch())
-	echoImage(-1, $server, $size_req);
+    $stmt->close();
 
-$stmt->close();
-
-// forward to the right page
-echoImage($online, $server, $size_req);
+    // forward to the right page
+    echoImage($online, $server, $size_req);
+}
 ?>

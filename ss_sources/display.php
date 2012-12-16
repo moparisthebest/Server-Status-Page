@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 if (!defined('SS_PAGE'))
-	die('Hacking attempt...');
+    die(highlight_file(__FILE__, true));
 
 function display(){
 	//echo 'this is display';
@@ -62,8 +62,6 @@ function display_table($online, $where, $num_servers = null){
      if($start == 0 && $online == 1 && !isset($_GET['sort']))
           echoTable('Spons', "`sponsored` != '0'", "ORDER BY `sponsored` DESC, RAND() LIMIT 10");
 
-
-
      echoTable('Other', $where, $order_by, $online, $start, $num_per_page, $num_servers);
      close_mysql();
 }
@@ -105,30 +103,23 @@ function echoTable($class, $where, $order_by, $online = 1, $start = 0, $num_per_
 }
 
 function echoTableRow($class, $name, $pic_url, $uid, $uname, $ip, $port, $version, $uptime, $time, $votes, $online = 1, $odd = False){
-	global $thispage;
+	global $thispage, $g_img_dir;
 
-	if($pic_url != '')
+	if($pic_url != '' && $class == "Spons")
 		$name = '<img src="'.$pic_url.'" alt="'.$name.'" width="185" height="25" />';
 
-	if($online == 1){
-		$link = "http://www.moparscape.org/index.php?server=%s&amp;port=%s&amp;version=%s&amp;detail=";
-		$link = sprintf($link, $ip, $port, $version);
-		$play = '<a href="%s0">High</a> / <a href="%s1">Low</a>';
-		$play = sprintf($play, $link, $link);
-	}else{
-		$play = '<div class="offline">Server Offline!</div>';
-	}
-	// date("m-d-y", $time)
+    $play = echoPlay($online, $ip, $port, $version);
+    // date("m-d-y", $time)
 	// strftime($time_format, $time+$time_offset)
 ?>
         <tr<?php if($odd) echo ' class="odd"'; ?>>
           <td><a href="?server=<?php echo $ip; ?>"><?php echo $name; ?></a></td>
           <td><?php echo $version; ?></td>
-          <td><a href="http://www.moparscape.org/smf/index.php?action=profile;u=<?php echo $uid; ?>"><?php echo $uname; ?></a></td>
+          <td><a href="<?php echo urlForUid($uid); ?>"><?php echo $uname; ?></a></td>
           <td><?php echo $uptime; ?>%</td>
           <td><?php echo date("m-d-y", $time); ?></td>
           <td><?php echo ($votes > 0) ?  '+'.$votes: $votes; ?></td>
-          <td><a href="<?php echo $thispage ?>?action=up&amp;server=<?php echo $ip ?>"><img src="http://<?php echo $_SERVER['SERVER_NAME']; ?>/images/up.png" alt="Up" /></a><a href="<?php echo $thispage ?>?action=down&amp;server=<?php echo $ip ?>"><img src="http://<?php echo $_SERVER['SERVER_NAME']; ?>/images/down.png" alt="Down" /></a></td>
+          <td><a href="<?php echo $thispage ?>?action=up&amp;server=<?php echo $ip ?>"><img src="<?php echo $g_img_dir; ?>/up.png" alt="Up" /></a><a href="<?php echo $thispage ?>?action=down&amp;server=<?php echo $ip ?>"><img src="<?php echo $g_img_dir; ?>/down.png" alt="Down" /></a></td>
 <?php
 	if(!can_mod() || $class == "Spons"){
 ?>
@@ -145,7 +136,7 @@ function echoTableRow($class, $name, $pic_url, $uid, $uname, $ip, $port, $versio
 }
 
 function echoTableHeader($class, $num, $pageindex = null, $online = 1){
-	global $g_headers, $thispage;
+	global $g_headers, $thispage, $g_img_dir;
 
 	if($class == "Spons")
 		$caption = 'Sponsored Servers';
@@ -175,10 +166,10 @@ function echoTableHeader($class, $num, $pageindex = null, $online = 1){
 			$pic = '';
 			if((!isset($_GET['sort']) && $sort == 'uptime') || $sort == $_GET['sort']){
 				if(!isset($_GET['sort']) || isset($_GET['desc'])){
-					$name .= ' <img src="http://'.$_SERVER['SERVER_NAME'].'/images/sort_down.gif" alt="" />';
+					$name .= ' <img src="'.$g_img_dir.'/sort_down.gif" alt="" />';
 				}else{
 					$sort .= '&amp;desc';
-					$name .= ' <img src="http://'.$_SERVER['SERVER_NAME'].'/images/sort_up.gif" alt="" />';
+					$name .= ' <img src="'.$g_img_dir.'/sort_up.gif" alt="" />';
 				}
 			}
 			printf($link, $sort, $name);
@@ -212,7 +203,7 @@ function echoTableHeader($class, $num, $pageindex = null, $online = 1){
 ?>
         <tr>
           <th scope="row">Info</th>
-          <th scope="row" colspan="7"><a href="http://www.moparscape.org/sponsbid.php">How to get Sponsored</a>.</th>
+          <th scope="row" colspan="7"><a href="/sponsbid.php">How to get Sponsored</a>.</th>
         </tr>
 <?php
 	}

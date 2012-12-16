@@ -18,12 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 if (!defined('SS_PAGE'))
-	die('Hacking attempt...');
+    die(highlight_file(__FILE__, true));
 
 function vote(){
 //	forceLogin();
 
-	global $uid;
+	global $uid, $recaptcha_pubkey;
 
 	$action = $_GET['action'];
 
@@ -49,9 +49,10 @@ function vote(){
 		<input type="hidden" name="ip" value="<?php echo $ip; ?>" />
 
 		<?php
-		  require_once('recaptchalib.php');
-		  $publickey = "6LddIr4SAAAAALtdzE4zN3pkquo40zhRrOlab-Gf "; // you got this from the signup page
-		  echo recaptcha_get_html($publickey, null, ($_SERVER['HTTPS'] == "on") );
+            if(!empty($recaptcha_pubkey)){
+		        require_once('recaptchalib.php');
+		        echo recaptcha_get_html($recaptcha_pubkey, null, ($_SERVER['HTTPS'] == "on") );
+            }
 		?>
 
 		<input type="submit" name="submit" value="Vote" accesskey="s" />
@@ -61,10 +62,9 @@ function vote(){
 }
 
 function vote2(){
-// $_SERVER['HTTP_REFERER'] : http://mopar.moparscape.org/serverstatus.php?action=up&server=72.9.251.24
 //	forceLogin();
 
-	global $uid, $uname, $thispage, $time_format, $time_offset, $g_mysqli;
+	global $uid, $uname, $thispage, $time_format, $time_offset, $g_mysqli, $recaptcha_privkey;
 	
 	//wait time in seconds to vote again
 	$wait_time = 3600;
@@ -74,12 +74,13 @@ function vote2(){
 	if($action != 'up' && $action != 'down')
 		forward();
 
-	require_once('recaptchalib.php');
-	$privatekey = "6LddIr4SAAAAAIPlo9971NoHMx2HCUbHATsQVSX5";
-	$resp = recaptcha_check_answer ($privatekey,
-				      $_SERVER["REMOTE_ADDR"],
-				      $_POST["recaptcha_challenge_field"],
-				      $_POST["recaptcha_response_field"]);
+    if(!empty($recaptcha_privkey)){
+        require_once('recaptchalib.php');
+        $resp = recaptcha_check_answer ($recaptcha_privkey,
+                          $_SERVER["REMOTE_ADDR"],
+                          $_POST["recaptcha_challenge_field"],
+                          $_POST["recaptcha_response_field"]);
+    }
 
 	if (!$resp->is_valid) {
 	  // What happens when the CAPTCHA was entered incorrectly
@@ -141,7 +142,8 @@ function vote2(){
 	// execute the query
 	$stmt->execute();
 	if ($stmt->affected_rows != 1) {
-		echo 'Vote failed, PM <a href="http://www.moparscape.org/smf/index.php?action=profile;u=1">Moparisthebest</a> on the forums to with details so he can fix it.';
+        global $g_admin_contact;
+		echo 'Vote failed, PM '.$g_admin_contact.' on the forums to with details so he can fix it.';
 		return;
 	}
 	$stmt->close();
@@ -153,7 +155,8 @@ function vote2(){
 	$stmt->bind_param("isiiss", $uid, $uname, $id, $_SESSION['last_voted'], $_SERVER['REMOTE_ADDR'], $op);
 	$stmt->execute() or debug($g_mysqli->error);
 	if ($stmt->affected_rows != 1) {
-		echo 'Vote log failed, PM <a href="http://www.moparscape.org/smf/index.php?action=profile;u=1">Moparisthebest</a> on the forums to with details so he can fix it.';
+        global $g_admin_contact;
+		echo 'Vote log failed, PM '.$g_admin_contact.' on the forums to with details so he can fix it.';
 		return;
 	}
 	$stmt->close();
@@ -181,4 +184,4 @@ function getMysqlId($server, &$id, &$suid, &$name, &$ip){
 	return true;
 }
 
-?> 
+?>

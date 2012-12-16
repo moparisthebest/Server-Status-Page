@@ -32,6 +32,9 @@
  * THE SOFTWARE.
  */
 
+if (!defined('SS_PAGE'))
+    die(highlight_file(__FILE__, true));
+
 /**
  * The reCAPTCHA server URL's
  */

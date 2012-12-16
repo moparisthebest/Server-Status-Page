@@ -16,18 +16,19 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-if($_REQUEST['action'] != 'verify')
-	require_once('/path/to/agreed.php');
 
-//ini_set('display_errors', 0);
-//error_reporting(E_ALL);
+if (!defined('SS_PAGE'))
+    die(highlight_file(__FILE__, true));
 
-define('SS_PAGE', 1);
+global $g_source_dir, $thispage, $g_allowed_url, $g_allowed_alpha, $g_allowed_key, $g_allowed_dns, $g_ss_version;
+$g_ss_version = '0.5';
+$thispage = 'http'.(isset($_SERVER['HTTPS']) ? 's' : '').'://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
+$g_allowed_key = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+$g_allowed_alpha = $g_allowed_key."- ";
+$g_allowed_dns = $g_allowed_key."-.";
+$g_allowed_url = $g_allowed_key." /-:.%";
 
-global $ss_sourcedir;
-$ss_sourcedir = './ss_sources';
-
-require_once($ss_sourcedir.'/util.php');
+require_once($g_source_dir.'/util.php');
 
 // What function shall we execute? (done like this for memory's sake.)
 // defaults
@@ -36,7 +37,7 @@ $do_setup = true;
 $action = ss_main($header, $do_setup);
 
 if($do_setup)
-	doSetup();
+	doUserSetup();
 
 if($header)
 	echoHeader($action);
@@ -49,14 +50,14 @@ if($header)
 // The main controlling function.
 function ss_main(&$header, &$do_setup)
 {
-	global $ss_sourcedir;
+	global $g_source_dir;
 
 	if (empty($_REQUEST['action'])){
 		if(!empty($_REQUEST['server'])){
-			require_once($ss_sourcedir . '/view.php');
+			require_once($g_source_dir . '/view.php');
 			return 'view';
 		}
-		require_once($ss_sourcedir . '/display.php');
+		require_once($g_source_dir . '/display.php');
 		return 'display';
 	}
 
@@ -68,6 +69,8 @@ function ss_main(&$header, &$do_setup)
 		'register2' => array('register.php', 'register2'),
 		'verify' => array('verify.php', 'verify', false, false),
 		'random' => array('random.php', 'random_page', false, false),
+        'image' => array('image_server.php', 'gen_image', false, false),
+        'zip' => array('tbszip.php', 'zip_sources', false, false),
 		'up' => array('vote.php', 'vote'),
 		'down' => array('vote.php', 'vote'),
 		'vote' => array('vote.php', 'vote2'),
@@ -86,12 +89,12 @@ function ss_main(&$header, &$do_setup)
 		//die('No action found, try '.$thispage);
 
 		// Fall through to the display then...
-		require_once($ss_sourcedir . '/display.php');
+		require_once($g_source_dir . '/display.php');
 		return 'display';
 	}
 
 	// Otherwise, it was set - so let's go to that action.
-	require_once($ss_sourcedir . '/' . $actionArray[$_REQUEST['action']][0]);
+	require_once($g_source_dir . '/' . $actionArray[$_REQUEST['action']][0]);
 	// here is the only place we NEED to set $header and $do_setup
 	$header = (isset($actionArray[$_REQUEST['action']][2]) ? $actionArray[$_REQUEST['action']][2] : true);
 	$do_setup = (isset($actionArray[$_REQUEST['action']][3]) ? $actionArray[$_REQUEST['action']][3] : true);
