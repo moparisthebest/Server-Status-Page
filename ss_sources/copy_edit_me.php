@@ -42,7 +42,7 @@ $g_admin_contact = '<a href="/smf/index.php?action=profile;u=youruid">yourname</
 define('SS_PAGE', 1);
 
 # include forum connector
-require_once($g_source_dir.'/forums/smf.php');
+require_once($g_source_dir . '/forums/smf.php');
 # do custom setup for above forum connector
 global $path_to_smf, $smf_admin_groups, $g_forum_url;
 $path_to_smf = '/path/to/smf';
@@ -50,7 +50,7 @@ $smf_admin_groups = array(2, 63, 70);
 $g_forum_url = '/smf/index.php';
 
 # include theme
-require_once($g_source_dir.'/themes/default.php');
+require_once($g_source_dir . '/themes/default.php');
 # do custom setup for above theme
 $g_theme = array();
 $g_theme['title'] = "Server Status Checker";
@@ -68,7 +68,7 @@ $g_theme['header'] = 'Welcome visitor!';
 //$recaptcha_pubkey = "";
 //$recaptcha_privkey = "";
 
-function echoPlay($online, $ip, $port, $version){
+function echoPlay($online, $ip, $port, $version) {
     if ($online == 1) {
         $link = "http://www.moparscape.org/index.php?server=%s&amp;port=%s&amp;version=%s&amp;detail=";
         $link = sprintf($link, $ip, $port, $version);
@@ -82,14 +82,14 @@ function echoPlay($online, $ip, $port, $version){
 }
 
 // ads and such
-function echoAd(){
+function echoAd() {
 
 }
 
-function echoAnalytics(){
+function echoAnalytics() {
 
 }
 
 # end configuration, kick off the application
-require_once($g_source_dir.'/main.php');
+require_once($g_source_dir . '/main.php');
 ?>

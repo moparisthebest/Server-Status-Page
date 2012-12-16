@@ -1,24 +1,27 @@
 * {
-	padding : 0;
-	margin : 0;
+    padding: 0;
+    margin: 0;
 }
+
 a {
-	color: #0000CC;
-	text-decoration: none;
-	font-size: 13px;
-    }
+    color: #0000CC;
+    text-decoration: none;
+    font-size: 13px;
+}
+
 a:hover {
-	color:navy;
-	text-decoration:underline;
+    color: navy;
+    text-decoration: underline;
 }
 
 a.tdheader {
-	color: #555;
-	text-decoration: none;
-	font-size: 13px;
-    }
+    color: #555;
+    text-decoration: none;
+    font-size: 13px;
+}
+
 a.tdheader:hover {
-	text-decoration:underline;
+    text-decoration: underline;
 }
 
 /*------------------------------------------------------------*
@@ -26,299 +29,318 @@ a.tdheader:hover {
 **------------------------------------------------------------*/
 
 #nav {
-	margin : 5px 5px 0px 5px;
-	padding: 0;
-	float: left;
-	}
+    margin: 5px 5px 0px 5px;
+    padding: 0;
+    float: left;
+}
+
 #nav li {
-	list-style-type: none;
-	display: inline;
-	line-height: 20px;
-	}		
-#nav li a { 
-	text-decoration: none; 
-	color: #ddd;
-	background-color: #858F9E;
-	border-right: 4px solid #DFDFDF; 
-	border-bottom: 0;
-	padding: 3px 8px;
-	font-size: 1em;
-	float: left;
-	font-weight: bold;
-	}
-#nav li a:hover { background-color: #6B7687; }
-#nav li a.on { background-color: #49515C; color: #C6C4C5; }
+    list-style-type: none;
+    display: inline;
+    line-height: 20px;
+}
+
+#nav li a {
+    text-decoration: none;
+    color: #ddd;
+    background-color: #858F9E;
+    border-right: 4px solid #DFDFDF;
+    border-bottom: 0;
+    padding: 3px 8px;
+    font-size: 1em;
+    float: left;
+    font-weight: bold;
+}
+
+#nav li a:hover {
+    background-color: #6B7687;
+}
+
+#nav li a.on {
+    background-color: #49515C;
+    color: #C6C4C5;
+}
 
 body {
-	margin: 0px;
-	height: 100%;
-	font-family : Arial, Helvetica, sans-serif;
-	color : #666666;
-	background-color: #DFDFDF;
-	font-size : 12px;
+    margin: 0px;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #666666;
+    background-color: #DFDFDF;
+    font-size: 12px;
 }
+
 #header img {
-	padding : 3px;
-	border : 0px;
+    padding: 3px;
+    border: 0px;
 }
+
 img.floatTL {
-	float : left;
-	margin-right : 7px;
-	margin-bottom : 3px;
-	margin-top : 2px;
-	margin-left : 10px;
+    float: left;
+    margin-right: 7px;
+    margin-bottom: 3px;
+    margin-top: 2px;
+    margin-left: 10px;
 }
+
 img.floatTR {
-	float : right;
-	margin-left : 7px;
-	margin-bottom : 3px;
-	margin-top : 2px;
-	margin-right : 10px;
+    float: right;
+    margin-left: 7px;
+    margin-bottom: 3px;
+    margin-top: 2px;
+    margin-right: 10px;
 }
+
 .clear {
-	clear: both;
+    clear: both;
 }
+
 #wrapper {
-	position: relative;
-	width : 95%;
-	min-width: 950px;
-	margin : 0px auto 0px auto;
+    position: relative;
+    width: 95%;
+    min-width: 950px;
+    margin: 0px auto 0px auto;
 }
+
 #header {
-	border : 1px solid #ccc;
-	margin : 5px 5px 5px 5px;
-	height : 170px;
-	text-align: center;
-	border: 1px solid #999;
-	background: #dfdfdf url('header.png') top repeat-x;
+    border: 1px solid #ccc;
+    margin: 5px 5px 5px 5px;
+    height: 170px;
+    text-align: center;
+    border: 1px solid #999;
+    background: #dfdfdf url('header.png') top repeat-x;
 }
+
 #lefthead {
-	float: left;
+    float: left;
 }
+
 #banner {
-	float: none;
+    float: none;
 }
+
 #righthead {
-	float: right;
+    float: right;
 }
 
 #leftcolumn {
-	margin : 0 5px 5px 5px;
-	width : 160px;
-	float : left;
-	border: 1px solid #999;
-	position: absolute;
-	top: 180px;
-	left: 0;
+    margin: 0 5px 5px 5px;
+    width: 160px;
+    float: left;
+    border: 1px solid #999;
+    position: absolute;
+    top: 180px;
+    left: 0;
 }
+
 #centercolumn {
-	border: 1px solid #999;
-	background-color: #CCC;
-	margin : 0 173px 0 173px;
-	padding: 0px 5px 5px 5px;
-	float: none;
+    border: 1px solid #999;
+    background-color: #CCC;
+    margin: 0 173px 0 173px;
+    padding: 0px 5px 5px 5px;
+    float: none;
 }
+
 #rightcolumn {
-	margin : 0 5px 0 0;
-	width : 160px;
-	float : right;
-	border: 1px solid #999;
-	position: absolute;
-	top: 180px;
-	right: 0;
+    margin: 0 5px 0 0;
+    width: 160px;
+    float: right;
+    border: 1px solid #999;
+    position: absolute;
+    top: 180px;
+    right: 0;
 }
+
 #leftcolumn h3 {
-	background-color : #847ec8;
-	font-size : 1em;
-	padding-left : 7px;
-	padding-top : 2px;
-	padding-bottom : 2px;
-	color : #fff;
-	font-weight : bolder;
+    background-color: #847ec8;
+    font-size: 1em;
+    padding-left: 7px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    color: #fff;
+    font-weight: bolder;
 }
+
 #rightcolumn h3 {
-	background-color : #847ec8;
-	font-size : 1em;
-	padding-left : 7px;
-	padding-top : 2px;
-	padding-bottom : 2px;
-	color : #fff;
-	font-weight : bolder;
+    background-color: #847ec8;
+    font-size: 1em;
+    padding-left: 7px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    color: #fff;
+    font-weight: bolder;
 }
 
-table.spons caption
-{
-	background: url('goldbar.png') no-repeat;
-	width: 580px;
-	margin: auto;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	font-size: 20px;
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-	color: #555;
-}
-table.spons
-{
-	width: 100%;
-	border-spacing: 0px;
-	border: 2px solid #d3ae14;
-}
-table.spons tbody tr
-{
-	background: #ffdf50;
-}
-table.spons tbody tr td
-{
-	padding: 3px;	
-	text-align: center;
-}
-table.spons thead, table.spons tfoot
-{
-	background: #eacc51;
-}
-table.spons th, table.other th
-{
-	padding: 5px;
+table.spons caption {
+    background: url('goldbar.png') no-repeat;
+    width: 580px;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 20px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    color: #555;
 }
 
-table.spons .odd
-{
-	background: #fde786;
-}
-table.spons tr:hover td
-{
-	background-color: #eacc51 ;
+table.spons {
+    width: 100%;
+    border-spacing: 0px;
+    border: 2px solid #d3ae14;
 }
 
-
-
-table.other caption
-{
-	background: url('silverbar.png') no-repeat;
-	width: 580px;
-	margin: auto;
-	height: 66px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	font-size: 20px;
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-	color: #555;
-}
-table.other
-{
-	width: 100%;
-	border-spacing: 0px;
-	border: 2px solid #c0c0c0;
-}
-table.other tbody tr
-{
-	background: #ebebeb;
-}
-table.other tbody tr td
-{
-	padding: 3px;	
-	text-align: center;
-}
-table.other thead, table.other tfoot
-{
-	background: #d9d9d9;
-}
-table.other th, table.other th
-{
-	padding: 5px;
-}
-table.other .odd
-{
-	background: #FFF;	
-}
-table.other tr:hover td
-{
-	background-color: #d9d9d9 ;
+table.spons tbody tr {
+    background: #ffdf50;
 }
 
-fieldset
-{
-	width: 100%;
-	border-spacing: 0px;
-	border: 0;
+table.spons tbody tr td {
+    padding: 3px;
+    text-align: center;
 }
 
-form
-{
-	width: 100%;
-	border-spacing: 0px;
-	border: 0;
+table.spons thead, table.spons tfoot {
+    background: #eacc51;
 }
 
+table.spons th, table.other th {
+    padding: 5px;
+}
 
+table.spons .odd {
+    background: #fde786;
+}
 
+table.spons tr:hover td {
+    background-color: #eacc51;
+}
 
+table.other caption {
+    background: url('silverbar.png') no-repeat;
+    width: 580px;
+    margin: auto;
+    height: 66px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 20px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    color: #555;
+}
+
+table.other {
+    width: 100%;
+    border-spacing: 0px;
+    border: 2px solid #c0c0c0;
+}
+
+table.other tbody tr {
+    background: #ebebeb;
+}
+
+table.other tbody tr td {
+    padding: 3px;
+    text-align: center;
+}
+
+table.other thead, table.other tfoot {
+    background: #d9d9d9;
+}
+
+table.other th, table.other th {
+    padding: 5px;
+}
+
+table.other .odd {
+    background: #FFF;
+}
+
+table.other tr:hover td {
+    background-color: #d9d9d9;
+}
+
+fieldset {
+    width: 100%;
+    border-spacing: 0px;
+    border: 0;
+}
 
 form {
-	margin-top : 0;
-	width : 150px;
-	margin-left : 9px;
-	margin-right : 5px;
-	margin-bottom : 15px;
+    width: 100%;
+    border-spacing: 0px;
+    border: 0;
 }
+
+form {
+    margin-top: 0;
+    width: 150px;
+    margin-left: 9px;
+    margin-right: 5px;
+    margin-bottom: 15px;
+}
+
 form p {
-	padding-top : 10px;
-	padding-left : 5px;
-	padding-bottom : 5px;
-	color : #847ec8;
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    color: #847ec8;
 }
+
 .reg p {
-	padding-left : 5px;
+    padding-left: 5px;
 }
+
 .textright1 h2 {
-	background-image : url(buttonyellow.jpg);
-	background-repeat : no-repeat;
-	margin-left : 10px;
-	font-size : 17px;
-	font-weight : lighter;
-	padding-left : 5px;
-	padding-top : 8px;
-	padding-bottom : 7px;
-	margin-top : 15px;
+    background-image: url(buttonyellow.jpg);
+    background-repeat: no-repeat;
+    margin-left: 10px;
+    font-size: 17px;
+    font-weight: lighter;
+    padding-left: 5px;
+    padding-top: 8px;
+    padding-bottom: 7px;
+    margin-top: 15px;
 }
+
 .textright1 p, .textright2 p, .textright3 p, .textright4 p, .textright5 p {
-	margin-top : -4px;
-	margin-left : 11px;
-	margin-right : 10px;
-	border-left : 1px solid #ccc;
-	border-right : 1px solid #ccc;
-	padding-left : 3px;
-	padding-top : 5px;
-	padding-bottom : 5px;
-	border-bottom : 1px solid #ccc;
+    margin-top: -4px;
+    margin-left: 11px;
+    margin-right: 10px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding-left: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
 }
+
 .textright2 h2 {
-	background-image : url(buttongreen.jpg);
-	background-repeat : no-repeat;
-	margin-left : 10px;
-	font-size : 17px;
-	font-weight : lighter;
-	padding-left : 5px;
-	padding-top : 8px;
-	padding-bottom : 7px;
-	margin-top : 15px;
+    background-image: url(buttongreen.jpg);
+    background-repeat: no-repeat;
+    margin-left: 10px;
+    font-size: 17px;
+    font-weight: lighter;
+    padding-left: 5px;
+    padding-top: 8px;
+    padding-bottom: 7px;
+    margin-top: 15px;
 }
+
 .textright3 h2, .textright4 h2, .textright5 h2 {
-	background-image : url(buttonorange.jpg);
-	background-repeat : no-repeat;
-	margin-left : 10px;
-	font-size : 17px;
-	font-weight : lighter;
-	padding-left : 5px;
-	padding-top : 8px;
-	padding-bottom : 7px;
-	margin-top : 15px;
+    background-image: url(buttonorange.jpg);
+    background-repeat: no-repeat;
+    margin-left: 10px;
+    font-size: 17px;
+    font-weight: lighter;
+    padding-left: 5px;
+    padding-top: 8px;
+    padding-bottom: 7px;
+    margin-top: 15px;
 }
+
 caption {
-	text-align: center;
-	font-size:20px;
-	font-weight:bold;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
 }
+
 /*
 tbody th, tbody td, thead th, thead td {
   vertical-align: top;
@@ -327,295 +349,330 @@ tbody th, tbody td, thead th, thead td {
 */
 
 #footer {
-	margin-top : 5px;
-	display : inline;
-	float : left;
-	width : 100%;
-	text-align : center;
-	padding-top : 10px;
-	padding-bottom : 10px;
+    margin-top: 5px;
+    display: inline;
+    float: left;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
+
 #footer p {
-	color : #000000;
+    color: #000000;
 }
+
 #footer a {
-	color : #a8bcf6;
+    color: #a8bcf6;
 }
 
+.searchbox {
+    float: right;
+    margin-top: -120px;
+    margin-right: 20px;
+}
 
 .searchbox {
-	float : right;
-	margin-top : -120px;
-	margin-right : 20px;
+    width: 127px;
+    height: 60px;
+    background: #847ec8;
+    color: #574a22;
 }
-.searchbox {
-	width : 127px;
-	height : 60px;
-	background : #847ec8;
-	color : #574a22;
-}
+
 .searchbox form.form {
-	width : 127px;
-	height : 60px;
+    width: 127px;
+    height: 60px;
 }
+
 .searchbox form.form .input {
-	width : 61px;
-	height : 16px;
-	color : #666;
-	border : none;
-	font : 10px Verdana, Arial, Helvetica, sans-serif;
-	font-weight : bold;
-	text-align : center;
-	text-transform : uppercase;
+    width: 61px;
+    height: 16px;
+    color: #666;
+    border: none;
+    font: 10px Verdana, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
 }
+
 .searchbox input {
-	width : 104px;
-	height : 16px;
-	display : block;
-	background : #fff;
-	color : #000;
-	font : 11px Verdana, Arial, Helvetica, sans-serif;
-	margin : 14px 0 0 10px;
+    width: 104px;
+    height: 16px;
+    display: block;
+    background: #fff;
+    color: #000;
+    font: 11px Verdana, Arial, Helvetica, sans-serif;
+    margin: 14px 0 0 10px;
 }
+
 .breakingnews {
-	width : 842px;
-	height : 20px;
-	border : 1px solid;
-	margin-top : -33px;
-	margin-left : 6px;
-	background-color : #ffffff;
-	padding-left : 3px;
-	padding-top : 5px;
+    width: 842px;
+    height: 20px;
+    border: 1px solid;
+    margin-top: -33px;
+    margin-left: 6px;
+    background-color: #ffffff;
+    padding-left: 3px;
+    padding-top: 5px;
 }
 
 #boxes_I {
-	width : 500px;
-	margin-left : 10px;
+    width: 500px;
+    margin-left: 10px;
 }
+
 .box1 {
-	width : 240px;
-	float : left;
-	margin-top : 5px;
-	margin-right : 10px;
+    width: 240px;
+    float: left;
+    margin-top: 5px;
+    margin-right: 10px;
 }
+
 .box1 img {
-	margin-top : 15px;
+    margin-top: 15px;
 }
+
 .box1 h3 {
-	background-image : url(hbg1.gif);
-	background-repeat : no-repeat;
-	padding-top : 5px;
-	font-family : Times, "Times New Roman", serif;
-	font-weight : lighter;
-	color : #686b43;
-	font-size : 1.5em;
-	padding-bottom : 10px;
+    background-image: url(hbg1.gif);
+    background-repeat: no-repeat;
+    padding-top: 5px;
+    font-family: Times, "Times New Roman", serif;
+    font-weight: lighter;
+    color: #686b43;
+    font-size: 1.5em;
+    padding-bottom: 10px;
 }
+
 .box1 h4 {
-	padding-right : 10px;
-	padding-top : 15px;
-	font-family : Times, "Times New Roman", serif;
-	color : #333;
-	font-weight : lighter;
-	font-weight : bolder;
+    padding-right: 10px;
+    padding-top: 15px;
+    font-family: Times, "Times New Roman", serif;
+    color: #333;
+    font-weight: lighter;
+    font-weight: bolder;
 }
+
 .box2 {
-	width : 240px;
-	float : right;
-	margin-top : 5px;
-	margin-right : 10px;
+    width: 240px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
 }
+
 .box2 h3 {
-	background-image : url(hbg1.gif);
-	background-repeat : no-repeat;
-	padding-top : 5px;
-	font-family : Times, "Times New Roman", serif;
-	font-weight : lighter;
-	color : #686b43;
-	font-size : 1.5em;
-	padding-bottom : 10px;
+    background-image: url(hbg1.gif);
+    background-repeat: no-repeat;
+    padding-top: 5px;
+    font-family: Times, "Times New Roman", serif;
+    font-weight: lighter;
+    color: #686b43;
+    font-size: 1.5em;
+    padding-bottom: 10px;
 }
+
 .box2 h4 {
-	padding-right : 10px;
-	padding-top : 15px;
-	font-family : Times, "Times New Roman", serif;
-	color : #333;
-	font-weight : lighter;
-	font-weight : bolder;
+    padding-right: 10px;
+    padding-top: 15px;
+    font-family: Times, "Times New Roman", serif;
+    color: #333;
+    font-weight: lighter;
+    font-weight: bolder;
 }
+
 #threeboxes {
-	width : 480px;
-	position : relative;
-	margin : 15px auto 10px auto;
-	padding : 4px 0 0 5px;
-	border : 1px solid #ffe;
+    width: 480px;
+    position: relative;
+    margin: 15px auto 10px auto;
+    padding: 4px 0 0 5px;
+    border: 1px solid #ffe;
 }
+
 .boxone {
-	width : 150px;
-	float : left;
-	margin : 0 7px 0 0;
-	color : #524201;
-	font : 11px Verdana, Arial, Helvetica, sans-serif;
-	border : 1px solid #fff;
+    width: 150px;
+    float: left;
+    margin: 0 7px 0 0;
+    color: #524201;
+    font: 11px Verdana, Arial, Helvetica, sans-serif;
+    border: 1px solid #fff;
 }
+
 .boxone h2 {
-	color : #333;
-	font : 14px "Trebuchet MS", Arial, Helvetica, sans-serif;
-	font-weight : bolder;
-	padding : 0 0 0 0;
+    color: #333;
+    font: 14px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    padding: 0 0 0 0;
 }
+
 .boxone p {
-	padding : 0 0 0 0;
-	line-height : 12px;
+    padding: 0 0 0 0;
+    line-height: 12px;
 }
+
 .boxone p.more {
-	width : 66px;
-	height : 18px;
-	padding : 10px 0 0 24px;
+    width: 66px;
+    height: 18px;
+    padding: 10px 0 0 24px;
 }
+
 .boxone p.more a {
-	width : 66px;
-	height : 18px;
-	display : block;
-	background : #7e9dc8;
-	color : #fff;
-	font : 11px Verdana, Arial, Helvetica, sans-serif;
-	font-weight : bold;
-	text-align : center;
-	text-decoration : none;
+    width: 66px;
+    height: 18px;
+    display: block;
+    background: #7e9dc8;
+    color: #fff;
+    font: 11px Verdana, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
 }
+
 .boxtwo {
-	width : 150px;
-	color : #212121;
-	float : left;
-	margin : 0 7px 0 0;
-	font : 11px Verdana, Arial, Helvetica, sans-serif;
-	border : 1px solid #fff;
+    width: 150px;
+    color: #212121;
+    float: left;
+    margin: 0 7px 0 0;
+    font: 11px Verdana, Arial, Helvetica, sans-serif;
+    border: 1px solid #fff;
 }
+
 .boxtwo h2 {
-	color : #333;
-	font : 14px "Trebuchet MS", Arial, Helvetica, sans-serif;
-	font-weight : bolder;
-	padding : 0 0 0 0;
+    color: #333;
+    font: 14px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    padding: 0 0 0 0;
 }
+
 .boxtwo p {
-	padding : 0 0 0 0;
-	line-height : 12px;
+    padding: 0 0 0 0;
+    line-height: 12px;
 }
+
 .boxtwo p.more {
-	width : 66px;
-	height : 18px;
-	padding : 10px 0 0 24px;
+    width: 66px;
+    height: 18px;
+    padding: 10px 0 0 24px;
 }
+
 .boxtwo p.more a {
-	width : 66px;
-	height : 18px;
-	display : block;
-	background : #7e9dc8;
-	color : #fff;
-	font : 11px Verdana, Arial, Helvetica, sans-serif;
-	font-weight : bold;
-	text-align : center;
-	text-decoration : none;
+    width: 66px;
+    height: 18px;
+    display: block;
+    background: #7e9dc8;
+    color: #fff;
+    font: 11px Verdana, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
 }
+
 .boxthree {
-	width : 150px;
-	color : #333;
-	float : left;
-	margin : 0 7px 0 0;
-	font : 11px Verdana, Arial, Helvetica, sans-serif;
-	border : 1px solid #fff;
+    width: 150px;
+    color: #333;
+    float: left;
+    margin: 0 7px 0 0;
+    font: 11px Verdana, Arial, Helvetica, sans-serif;
+    border: 1px solid #fff;
 }
+
 .boxthree h2 {
-	color : #333;
-	font : 14px "Trebuchet MS", Arial, Helvetica, sans-serif;
-	font-weight : bolder;
-	padding : 0 0 0 0;
+    color: #333;
+    font: 14px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    padding: 0 0 0 0;
 }
+
 .boxthree p {
-	padding : 0 0 0 0;
-	line-height : 12px;
+    padding: 0 0 0 0;
+    line-height: 12px;
 }
+
 .boxthree p.more {
-	width : 66px;
-	height : 18px;
-	padding : 10px 0 0 24px;
+    width: 66px;
+    height: 18px;
+    padding: 10px 0 0 24px;
 }
+
 .boxthree p.more a {
-	width : 66px;
-	height : 18px;
-	display : block;
-	background : #7e9dc8;
-	color : #fff;
-	font : 11px Verdana, Arial, Helvetica, sans-serif;
-	font-weight : bold;
-	text-align : center;
-	text-decoration : none;
+    width: 66px;
+    height: 18px;
+    display: block;
+    background: #7e9dc8;
+    color: #fff;
+    font: 11px Verdana, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
 }
+
 .onemorebox {
-	padding-top : 15px;
-	padding-bottom : 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
+
 .onemorebox h2 {
-	font-family : Times, "Times New Roman", serif;
-	font-size : 1.6em;
-	color : #7e9dc8;
-	padding-top : 10px;
-	margin-left : 10px;
+    font-family: Times, "Times New Roman", serif;
+    font-size: 1.6em;
+    color: #7e9dc8;
+    padding-top: 10px;
+    margin-left: 10px;
 }
+
 .onemorebox p {
-	margin-right : 10px;
-	text-align : justify;
+    margin-right: 10px;
+    text-align: justify;
 }
 
 .menuleft ul {
-	margin : 10px 0 0 0;
-	list-style-type : none;
-	margin-left : 5px;
-}
-.menuleft ul li {
-	width : 155px;
-	height : 15px;
-	border-bottom : 1px dashed #868686;
-}
-.menuleft ul li a {
-	display : block;
-	height : 12px;
-	background : url(arrow1.gif) no-repeat 0 50%;
-	color : #888f3d;
-	font : 400 11px Arial, Helvetica, sans-serif;
-	padding : 0 0 0 10px;
-}
-.menuleft ul li a:hover {
-	background : url(arrow2.gif) no-repeat 0 50%;
-	text-decoration : none;
-	color : #7e9dc8;
-}
-.menuleft ul li.last {
-	border : none;
+    margin: 10px 0 0 0;
+    list-style-type: none;
+    margin-left: 5px;
 }
 
+.menuleft ul li {
+    width: 155px;
+    height: 15px;
+    border-bottom: 1px dashed #868686;
+}
+
+.menuleft ul li a {
+    display: block;
+    height: 12px;
+    background: url(arrow1.gif) no-repeat 0 50%;
+    color: #888f3d;
+    font: 400 11px Arial, Helvetica, sans-serif;
+    padding: 0 0 0 10px;
+}
+
+.menuleft ul li a:hover {
+    background: url(arrow2.gif) no-repeat 0 50%;
+    text-decoration: none;
+    color: #7e9dc8;
+}
+
+.menuleft ul li.last {
+    border: none;
+}
 
 img {
-	vertical-align: bottom;
+    vertical-align: bottom;
 }
 
 .title {
-	font-weight: bold;
-	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
-	text-decoration: underline;
-	display : block;
+    font-weight: bold;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: underline;
+    display: block;
 }
 
 .smf_edit {
-	background: #ebebeb;
+    background: #ebebeb;
 }
 
 .offline {
-	color: #FF0000;
-	font-weight: bold;
+    color: #FF0000;
+    font-weight: bold;
 }
 
 #postmodify {
@@ -623,404 +680,372 @@ img {
     width: 100%;
 }
 
-.black, .black a:link, .black a:visited
- {
-     color: black;
- }
+.black, .black a:link, .black a:visited {
+    color: black;
+}
 
 /* Following from SMF. */
 
 /* No image should have a border when linked */
-a img
-{
-	border: 0;
+a img {
+    border: 0;
 }
-
 
 /* Input boxes - just a bit smaller than normal so they align well. */
-input, textarea, button
-{
-	color: #000000;
-	font-family: verdana, sans-serif;
-}
-input, button
-{
-	font-size: 90%;
+input, textarea, button {
+    color: #000000;
+    font-family: verdana, sans-serif;
 }
 
-textarea
-{
-	font-size: 100%;
-	color: #000000;
-	font-family: verdana, sans-serif;
+input, button {
+    font-size: 90%;
+}
+
+textarea {
+    font-size: 100%;
+    color: #000000;
+    font-family: verdana, sans-serif;
 }
 
 /* All input elements that are checkboxes or radio buttons. */
-input.check
-{
+input.check {
 }
 
 /* Selects are a bit smaller, because it makes them look even better 8). */
-select
-{
-	font-size: 90%;
-	font-weight: normal;
-	color: #000000;
-	font-family: verdana, sans-serif;
+select {
+    font-size: 90%;
+    font-weight: normal;
+    color: #000000;
+    font-family: verdana, sans-serif;
 }
 
 /* Standard horizontal rule.. ([hr], etc.) */
-hr, .hrcolor
-{
-	height: 1px;
-	border: 0;
-	color: #666666;
-	background-color: #666666;
+hr, .hrcolor {
+    height: 1px;
+    border: 0;
+    color: #666666;
+    background-color: #666666;
 }
+
 /* A quote, perhaps from another post. */
-.quote
-{
-	color: #000000;
-	background-color: #D7DAEC;
-	border: 1px solid #000000;
-	margin: 1px;
-	padding: 1px;
-	font-size: x-small;
-	line-height: 1.4em;
+.quote {
+    color: #000000;
+    background-color: #D7DAEC;
+    border: 1px solid #000000;
+    margin: 1px;
+    padding: 1px;
+    font-size: x-small;
+    line-height: 1.4em;
 }
 
 /* A code block - maybe even PHP ;). */
-.code
-{
-	color: #000000;
-	background-color: #dddddd;
-	font-family: "courier new", "times new roman", monospace;
-	font-size: x-small;
-	line-height: 1.3em;
-	/* Put a nice border around it. */
-	border: 1px solid #000000;
-	margin: 1px auto 1px auto;
-	padding: 1px;
-	width: 99%;
-	/* Don't wrap its contents, and show scrollbars. */
-	white-space: nowrap;
-	overflow: auto;
-	/* Stop after about 24 lines, and just show a scrollbar. */
-	max-height: 24em;
+.code {
+    color: #000000;
+    background-color: #dddddd;
+    font-family: "courier new", "times new roman", monospace;
+    font-size: x-small;
+    line-height: 1.3em;
+    /* Put a nice border around it. */
+    border: 1px solid #000000;
+    margin: 1px auto 1px auto;
+    padding: 1px;
+    width: 99%;
+    /* Don't wrap its contents, and show scrollbars. */
+    white-space: nowrap;
+    overflow: auto;
+    /* Stop after about 24 lines, and just show a scrollbar. */
+    max-height: 24em;
 }
 
 /* The "Quote:" and "Code:" header parts... */
-.quoteheader, .codeheader
-{
-	color: #000000;
-	text-decoration: none;
-	font-style: normal;
-	font-weight: bold;
-	font-size: x-small;
-	line-height: 1.2em;
+.quoteheader, .codeheader {
+    color: #000000;
+    text-decoration: none;
+    font-style: normal;
+    font-weight: bold;
+    font-size: x-small;
+    line-height: 1.2em;
 }
 
 /* Generally, those [?] icons.  This makes your cursor a help icon. */
-.help
-{
-	cursor: help;
+.help {
+    cursor: help;
 }
 
 /* /me uses this a lot. (emote, try typing /me in a post.) */
-.meaction
-{
-	color: red;
+.meaction {
+    color: red;
 }
 
 /* The main post box - this makes it as wide as possible. */
-.editor
-{
-	width: 96%;
+.editor {
+    width: 96%;
 }
 
 /* Highlighted text - such as search results. */
-.highlight
-{
-	background-color: yellow;
-	font-weight: bold;
-	color: black;
+.highlight {
+    background-color: yellow;
+    font-weight: bold;
+    color: black;
 }
 
 /* Alternating backgrounds for posts, and several other sections of the forum. */
-.windowbg, #preview_body
-{
-	color: #000000;
-	background-color: #ECEDF3;
+.windowbg, #preview_body {
+    color: #000000;
+    background-color: #ECEDF3;
 }
-.windowbg2
-{
-	color: #000000;
-	background-color: #F6F6F6;
+
+.windowbg2 {
+    color: #000000;
+    background-color: #F6F6F6;
 }
-.windowbg3
-{
-	color: #000000;
-	background-color: #E0E1E8;
+
+.windowbg3 {
+    color: #000000;
+    background-color: #E0E1E8;
 }
+
 /* the today container in calendar */
-.calendar_today
-{
-	background-color: #FFFFFF;
+.calendar_today {
+    background-color: #FFFFFF;
 }
 
 /* These are used primarily for titles, but also for headers (the row that says what everything in the table is.) */
-.titlebg, tr.titlebg th, tr.titlebg td, .titlebg2, tr.titlebg2 th, tr.titlebg2 td
-{
-	color: black;
-	font-style: normal;
-	background: url(titlebg.jpg) #E9F0F6 repeat-x;
-	border-bottom: solid 1px #9BAEBF;
-	border-top: solid 1px #FFFFFF;
-	padding-left: 10px;
-	padding-right: 10px;
-}
-.titlebg, .titlebg a:link, .titlebg a:visited
-{
-	font-weight: bold;
-	color: black;
-	font-style: normal;
+.titlebg, tr.titlebg th, tr.titlebg td, .titlebg2, tr.titlebg2 th, tr.titlebg2 td {
+    color: black;
+    font-style: normal;
+    background: url(titlebg.jpg) #E9F0F6 repeat-x;
+    border-bottom: solid 1px #9BAEBF;
+    border-top: solid 1px #FFFFFF;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-.titlebg a:hover
-{
-	color: #404040;
+.titlebg, .titlebg a:link, .titlebg a:visited {
+    font-weight: bold;
+    color: black;
+    font-style: normal;
 }
+
+.titlebg a:hover {
+    color: #404040;
+}
+
 /* same as titlebg, but used where bold text is not needed */
-.titlebg2 a:link, .titlebg2 a:visited
-{
-	color: black;
-	font-style: normal;
-	text-decoration: underline;
+.titlebg2 a:link, .titlebg2 a:visited {
+    color: black;
+    font-style: normal;
+    text-decoration: underline;
 }
 
-.titlebg2 a:hover
-{
-	text-decoration: underline;
+.titlebg2 a:hover {
+    text-decoration: underline;
 }
 
 /* This is used for categories, page indexes, and several other areas in the forum.
 .catbg and .catbg2 is for boardindex, while .catbg3 is for messageindex and display headers*/
-.catbg , tr.catbg td , .catbg3 , tr.catbg3 td
-{
-	background: url(catbg.jpg) #88A6C0 repeat-x;
-	color: #ffffff;
-	padding-left: 10px;
-	padding-right: 10px;
+.catbg, tr.catbg td, .catbg3, tr.catbg3 td {
+    background: url(catbg.jpg) #88A6C0 repeat-x;
+    color: #ffffff;
+    padding-left: 10px;
+    padding-right: 10px;
 }
-.catbg2 , tr.catbg2 td
-{
-	background: url(catbg2.jpg) #A1BFD9 repeat-x;
-	color: #ffffff;
-	padding-left: 10px;
-	padding-right: 10px;
+
+.catbg2, tr.catbg2 td {
+    background: url(catbg2.jpg) #A1BFD9 repeat-x;
+    color: #ffffff;
+    padding-left: 10px;
+    padding-right: 10px;
 }
-.catbg, .catbg2, .catbg3
-{
-	border-bottom: solid 1px #375576;
+
+.catbg, .catbg2, .catbg3 {
+    border-bottom: solid 1px #375576;
 }
-.catbg, .catbg2
-{
-	font-weight: bold;
+
+.catbg, .catbg2 {
+    font-weight: bold;
 }
-.catbg3, tr.catbg3 td, .catbg3 a:link, .catbg3 a:visited
-{
-	font-size: 95%;
-	color: white;
-	text-decoration: none;
+
+.catbg3, tr.catbg3 td, .catbg3 a:link, .catbg3 a:visited {
+    font-size: 95%;
+    color: white;
+    text-decoration: none;
 }
-.catbg a:link, .catbg a:visited , .catbg2 a:link, .catbg2 a:visited
-{
-	color: white;
-	text-decoration: none;
+
+.catbg a:link, .catbg a:visited, .catbg2 a:link, .catbg2 a:visited {
+    color: white;
+    text-decoration: none;
 }
-.catbg a:hover, .catbg2 a:hover, .catbg3 a:hover
-{
-	color: #e0e0ff;
+
+.catbg a:hover, .catbg2 a:hover, .catbg3 a:hover {
+    color: #e0e0ff;
 }
+
 /* This is used for tables that have a grid/border background color (such as the topic listing.) */
-.bordercolor
-{
-	background-color: #ADADAD;
-	padding: 0px;
+.bordercolor {
+    background-color: #ADADAD;
+    padding: 0px;
 }
 
 /* This is used on tables that should just have a border around them. */
-.tborder
-{
-	padding: 1px;
-	border: 1px solid #696969;
-	background-color: #FFFFFF;
+.tborder {
+    padding: 1px;
+    border: 1px solid #696969;
+    background-color: #FFFFFF;
 }
 
 /* Default font sizes: small (8pt), normal (10pt), and large (14pt). */
-.smalltext
-{
-	font-size: x-small;
-	font-family: verdana, sans-serif;
-}
-.middletext
-{
-	font-size: 90%;
-}
-.normaltext
-{
-	font-size: small;
-}
-.largetext
-{
-	font-size: large;
+.smalltext {
+    font-size: x-small;
+    font-family: verdana, sans-serif;
 }
 
+.middletext {
+    font-size: 90%;
+}
+
+.normaltext {
+    font-size: small;
+}
+
+.largetext {
+    font-size: large;
+}
 
 /* Posts and personal messages displayed throughout the forum. */
-.post, .personalmessage
-{
-	width: 100%;
-	line-height: 1.3em;
-	background: #ebebeb;
-	max-height : 486px;
-	overflow: auto;
-}
-/* Sometimes there will be an error when you post */
-.error
-{
-	color: red;
+.post, .personalmessage {
+    width: 100%;
+    line-height: 1.3em;
+    background: #ebebeb;
+    max-height: 486px;
+    overflow: auto;
 }
 
+/* Sometimes there will be an error when you post */
+.error {
+    color: red;
+}
 
 /* definitions for the main tab, active means the tab reflects which page is displayed */
-.maintab_first, .maintab_back, .maintab_last, .maintab_active_first, .maintab_active_back, .maintab_active_last
-{
-	color: white;
-	text-transform: uppercase;
-	vertical-align: top;
-}
-.maintab_back, .maintab_active_back
-{
-	color: white;
-	text-decoration: none;
-	font-size:  9px;
-	vertical-align: top;
-	padding: 2px 6px 6px 6px;
-	font-family: tahoma, sans-serif;
+.maintab_first, .maintab_back, .maintab_last, .maintab_active_first, .maintab_active_back, .maintab_active_last {
+    color: white;
+    text-transform: uppercase;
+    vertical-align: top;
 }
 
-.maintab_first
-{
-	background: url(maintab_first.gif) left bottom no-repeat;
-	width: 10px;
+.maintab_back, .maintab_active_back {
+    color: white;
+    text-decoration: none;
+    font-size: 9px;
+    vertical-align: top;
+    padding: 2px 6px 6px 6px;
+    font-family: tahoma, sans-serif;
 }
-.maintab_back
-{
-	background: url(maintab_back.gif) left bottom repeat-x;
+
+.maintab_first {
+    background: url(maintab_first.gif) left bottom no-repeat;
+    width: 10px;
 }
-.maintab_last
-{
-	background: url(maintab_last.gif) left bottom no-repeat;
-	width: 8px;
+
+.maintab_back {
+    background: url(maintab_back.gif) left bottom repeat-x;
 }
-.maintab_active_first
-{
-	background: url(maintab_active_first.gif) left bottom no-repeat;
-	width: 6px;
+
+.maintab_last {
+    background: url(maintab_last.gif) left bottom no-repeat;
+    width: 8px;
 }
-.maintab_active_back
-{
-	background: url(maintab_active_back.gif) left bottom repeat-x;
+
+.maintab_active_first {
+    background: url(maintab_active_first.gif) left bottom no-repeat;
+    width: 6px;
 }
-.maintab_active_last
-{
-	background: url(maintab_active_last.gif) left bottom no-repeat;
-	width: 8px;
+
+.maintab_active_back {
+    background: url(maintab_active_back.gif) left bottom repeat-x;
+}
+
+.maintab_active_last {
+    background: url(maintab_active_last.gif) left bottom no-repeat;
+    width: 8px;
 }
 
 /* how links behave in main tab. */
-.maintab_back a:link , .maintab_back a:visited, .maintab_active_back a:link , .maintab_active_back a:visited
-{
-	color: white;
-	text-decoration: none;
+.maintab_back a:link, .maintab_back a:visited, .maintab_active_back a:link, .maintab_active_back a:visited {
+    color: white;
+    text-decoration: none;
 }
 
-.maintab_back a:hover, .maintab_active_back a:hover
-{
-	color: #e0e0ff;
-	text-decoration: none;
+.maintab_back a:hover, .maintab_active_back a:hover {
+    color: #e0e0ff;
+    text-decoration: none;
 }
+
 /* definitions for the mirror tab */
-.mirrortab_first, .mirrortab_back, .mirrortab_last, .mirrortab_active_first, .mirrortab_active_back, .mirrortab_active_last
-{
-	color: white;
-	text-transform: uppercase;
-	vertical-align: top;
-}
-.mirrortab_back, .mirrortab_active_back
-{
-	color: white;
-	text-decoration: none;
-	font-size: 9px;
-	vertical-align: bottom;
-	padding: 6px 6px 2px 6px;
-	font-family: tahoma, sans-serif;
+.mirrortab_first, .mirrortab_back, .mirrortab_last, .mirrortab_active_first, .mirrortab_active_back, .mirrortab_active_last {
+    color: white;
+    text-transform: uppercase;
+    vertical-align: top;
 }
 
-.mirrortab_first
-{
-	background: url(mirrortab_first.gif) no-repeat;
-	width: 10px;
+.mirrortab_back, .mirrortab_active_back {
+    color: white;
+    text-decoration: none;
+    font-size: 9px;
+    vertical-align: bottom;
+    padding: 6px 6px 2px 6px;
+    font-family: tahoma, sans-serif;
 }
-.mirrortab_back
-{
-	background: url(mirrortab_back.gif) repeat-x;
+
+.mirrortab_first {
+    background: url(mirrortab_first.gif) no-repeat;
+    width: 10px;
 }
-.mirrortab_last
-{
-	background: url(mirrortab_last.gif) no-repeat;
-	width: 6px;
+
+.mirrortab_back {
+    background: url(mirrortab_back.gif) repeat-x;
 }
-.mirrortab_active_first
-{
-	background: url(mirrortab_active_first.gif) no-repeat;
-	width: 6px;
+
+.mirrortab_last {
+    background: url(mirrortab_last.gif) no-repeat;
+    width: 6px;
 }
-.mirrortab_active_back
-{
-	background: url(mirrortab_active_back.gif) repeat-x;
+
+.mirrortab_active_first {
+    background: url(mirrortab_active_first.gif) no-repeat;
+    width: 6px;
 }
-.mirrortab_active_last
-{
-	background: url(mirrortab_active_last.gif) no-repeat;
-	width: 8px;
+
+.mirrortab_active_back {
+    background: url(mirrortab_active_back.gif) repeat-x;
+}
+
+.mirrortab_active_last {
+    background: url(mirrortab_active_last.gif) no-repeat;
+    width: 8px;
 }
 
 /* how links behave in mirror tab. */
-.mirrortab_back a:link , .mirrortab_back a:visited, .mirrortab_active_back a:link , .mirrortab_active_back a:visited
-{
-	color: white;
-	text-decoration: none;
+.mirrortab_back a:link, .mirrortab_back a:visited, .mirrortab_active_back a:link, .mirrortab_active_back a:visited {
+    color: white;
+    text-decoration: none;
 }
 
-.mirrortab_back a:hover, .mirrortab_active_back a:hover
-{
-	color: #e0e0ff;
-	text-decoration: none;
+.mirrortab_back a:hover, .mirrortab_active_back a:hover {
+    color: #e0e0ff;
+    text-decoration: none;
 }
 
 /* The AJAX notifier */
-#ajax_in_progress
-{
-	background: #32CD32;
-	color: white;
-	text-align: center;
-	font-weight: bold;
-	font-size: 18pt;
-	padding: 3px;
-	width: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
+#ajax_in_progress {
+    background: #32CD32;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18pt;
+    padding: 3px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
 }

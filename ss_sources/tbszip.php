@@ -12,25 +12,25 @@ if (!defined('SS_PAGE'))
     die(highlight_file(__FILE__, true));
 
 
-function zipDir(clsTbsZip $zip, $folder_name, $path){
+function zipDir(clsTbsZip $zip, $folder_name, $path) {
     zipDirLen($zip, $folder_name, strlen($path), $path);
 }
 
-function zipDirLen(clsTbsZip $zip, $folder_name, $striplen, $path){
-    $ignore = array( 'cgi-bin', '.', '..' );
-    $dh = @opendir( $path );
-    while(false !== ($file = readdir($dh)))
-        if( !in_array( $file, $ignore ) ){
+function zipDirLen(clsTbsZip $zip, $folder_name, $striplen, $path) {
+    $ignore = array('cgi-bin', '.', '..');
+    $dh = @opendir($path);
+    while (false !== ($file = readdir($dh)))
+        if (!in_array($file, $ignore)) {
             $full_file = "$path/$file";
-            if(is_dir($full_file))
+            if (is_dir($full_file))
                 zipDirLen($zip, $folder_name, $striplen, $full_file);
             else
-                $zip->FileAdd($folder_name.substr($path, $striplen).'/'.$file, $full_file, TBSZIP_FILE);
+                $zip->FileAdd($folder_name . substr($path, $striplen) . '/' . $file, $full_file, TBSZIP_FILE);
         }
     closedir($dh);
 }
 
-function zip_sources(){
+function zip_sources() {
     $zip = new clsTbsZip(); // create a new instance of the TbsZip class
 
     $zip->CreateNew(); // start a new empty archive for adding files

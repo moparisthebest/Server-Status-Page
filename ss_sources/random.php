@@ -20,20 +20,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 if (!defined('SS_PAGE'))
     die(highlight_file(__FILE__, true));
 
-function random_page(){
-	mysql_con();
-	global $g_mysqli, $thispage;
-	$stmt = $g_mysqli->prepare("SELECT `ip` FROM `servers` WHERE `online` = ? ORDER BY RAND() LIMIT 1") or debug($g_mysqli->error);
-	$online = isset($_GET['offline']) ? 0 : 1;
-	$stmt->bind_param("i", $online);
-	$stmt->execute();
-	// bind result variables
-	$stmt->bind_result($rand_server);
-	$stmt->fetch();
-	$stmt->close();
-	close_mysql();
-	if(isset($_GET['offline']))
-		$rand_server .= "&offline";
-	header("Location: $thispage?server=$rand_server");
+function random_page() {
+    mysql_con();
+    global $g_mysqli, $thispage;
+    $stmt = $g_mysqli->prepare("SELECT `ip` FROM `servers` WHERE `online` = ? ORDER BY RAND() LIMIT 1") or debug($g_mysqli->error);
+    $online = isset($_GET['offline']) ? 0 : 1;
+    $stmt->bind_param("i", $online);
+    $stmt->execute();
+    // bind result variables
+    $stmt->bind_result($rand_server);
+    $stmt->fetch();
+    $stmt->close();
+    close_mysql();
+    if (isset($_GET['offline']))
+        $rand_server .= "&offline";
+    header("Location: $thispage?server=$rand_server");
 }
+
 ?>

@@ -23,9 +23,9 @@ if (!defined('SS_PAGE'))
 # globals that must be defined for this to function
 # global $path_to_smf, $smf_admin_groups, $g_forum_url;
 
-function doUserSetup(){
+function doUserSetup() {
     global $user_info, $path_to_smf, $smf_admin_groups;
-    require_once($path_to_smf.'/SSI.php');
+    require_once($path_to_smf . '/SSI.php');
     $user = ssi_welcome('array');
 
     // vars from SMF that we use, for easy compatibility for future versions
@@ -33,27 +33,27 @@ function doUserSetup(){
     $groups = $user_info['groups'];
     $time_format = $user_info['time_format'];
     # this is the number of seconds to add to time()
-    $time_offset = $user_info['time_offset']*3600;
+    $time_offset = $user_info['time_offset'] * 3600;
     $is_admin = $user['is_admin'];
     foreach ($smf_admin_groups as $admin_group)
-        if(in_array($admin_group, $groups))
+        if (in_array($admin_group, $groups))
             $is_admin = true;
     $is_guest = $user['is_guest'];
     $uname = $user['name'];
     $uid = $user['id'];
 }
 
-function &censor(&$text){
+function &censor(&$text) {
     global $path_to_smf;
-    require_once($path_to_smf.'/Sources/Subs-Post.php');
+    require_once($path_to_smf . '/Sources/Subs-Post.php');
     censorText($text);
 }
 
-function bb2html($bb_code, $previewing = false){
+function bb2html($bb_code, $previewing = false) {
     $bb_code = html_special($bb_code);
 
     global $path_to_smf;
-    require_once($path_to_smf.'/Sources/Subs-Post.php');
+    require_once($path_to_smf . '/Sources/Subs-Post.php');
 
     preparsecode($bb_code, $previewing);
     censorText($bb_code);
@@ -62,16 +62,17 @@ function bb2html($bb_code, $previewing = false){
     return $bb_code;
 }
 
-function echoLogin($returnto){
+function echoLogin($returnto) {
     ssi_login($returnto);
 }
 
-function echoLogoutLink($returnto){
+function echoLogoutLink($returnto) {
     ssi_logout($returnto);
 }
 
-function urlForUid($uid){
+function urlForUid($uid) {
     global $g_forum_url;
-    return $g_forum_url.'?action=profile;u='.$uid;
+    return $g_forum_url . '?action=profile;u=' . $uid;
 }
+
 ?>
