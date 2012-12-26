@@ -670,6 +670,11 @@ img {
     background: #ebebeb;
 }
 
+.online {
+    color: #00FF00;
+    font-weight: bold;
+}
+
 .offline {
     color: #FF0000;
     font-weight: bold;

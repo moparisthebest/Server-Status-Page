@@ -23,7 +23,7 @@ if (!defined('SS_PAGE'))
 function search() {
     forceLogin();
 
-    $chk_template = "\t\t" . '<input type="checkbox" checked="checked" name="versions[]" value="%d" /> %d <br />' . "\n";
+    $chk_template = "\t\t" . '<input type="checkbox" checked="checked" name="versions[]" value="%s" /> %s <br />' . "\n";
     global $g_versions;
 
     echo "Enter your search terms.<br />";

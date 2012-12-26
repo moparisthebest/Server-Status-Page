@@ -358,7 +358,7 @@ function echoForm($name, $ip, $port, $version, $message, $pic_url, $edit = false
 
         <td><select name="version">
             <?php
-            $v_template = "<option>%d</option>\n";
+            $v_template = "<option>%s</option>\n";
             if (isset($version))
                 printf($v_template, $version);
             foreach ($g_versions as $v)
