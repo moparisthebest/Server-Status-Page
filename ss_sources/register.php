@@ -281,7 +281,7 @@ function echoPostForm($edit = null) {
 }
 
 function echoForm($name, $ip, $port, $version, $message, $pic_url, $edit = false) {
-    global $g_versions, $g_img_dir;
+    global $g_versions, $g_img_dir, $g_default_port;
     if (isset($name))
         censor($name);
     $preview_message = $message;
@@ -347,7 +347,7 @@ function echoForm($name, $ip, $port, $version, $message, $pic_url, $edit = false
         <tr>
             <td>Port</td>
 
-            <td><input type="text" name="port" value="<?php echo (isset($port) ? $port : '43594'); ?>"/></td>
+            <td><input type="text" name="port" value="<?php echo (isset($port) ? $port : $g_default_port); ?>"/></td>
         </tr>
             <?php
         }
