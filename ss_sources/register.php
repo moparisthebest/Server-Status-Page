@@ -131,7 +131,7 @@ function register2() {
 				If you have problems with this, PM $g_admin_contact on the forums.";
         }
 
-        global $uname, $g_admin_contact;
+        global $uname, $g_admin_contact, $g_checker_ip;
         // don't bother with pic_url, they can edit it if they are sponsored
         $sql = 'INSERT INTO `toadd` (`uid`, `uname`, `name`, `ip`, `port`, `version`, `time`, `info`, `ipaddress`, `rs_name`, `rs_pass`, `key`, `verified`) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $stmt = $g_mysqli->prepare($sql) or debug($g_mysqli->error);
@@ -140,7 +140,7 @@ function register2() {
 Username: <strong class=\"highlight\">$rs_name</strong>\n<br />
 Password: <strong class=\"highlight\">$rs_pass</strong>\n<br />
 to make sure it is online, and if successful, it will be posted.  <br />
-You must register this username and password for me on your server and allow it to be logged into from the IP 69.39.224.55<br />
+You must register this username and password for me on your server and allow it to be logged into from the IP $g_checker_ip<br />
 The server will be deleted from the queue if not verified and logged into within 24 hours of posting.<br />" . $verify_msg;
         $fail_msg = 'Registration failed, PM ' . $g_admin_contact . ' on the forums to with details so he can fix it.';
     }

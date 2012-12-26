@@ -26,7 +26,7 @@ if (!defined('SS_PAGE'))
 //error_reporting(E_ALL);
 
 # you need to set these regardless
-global $g_source_dir, $g_sql_host, $g_sql_user, $g_sql_pass, $g_sql_db, $g_versions, $g_default_port, $g_theme, $g_img_dir, $g_admin_contact;
+global $g_source_dir, $g_sql_host, $g_sql_user, $g_sql_pass, $g_sql_db, $g_versions, $g_default_port, $g_theme, $g_img_dir, $g_admin_contact, $g_checker_ip;
 # path to ss_sources
 $g_source_dir = './ss_sources';
 $g_img_dir = './images';
@@ -39,6 +39,8 @@ $g_sql_db = 'serverstat';
 $g_versions = array(317, 508);
 $g_default_port = 43594;
 $g_admin_contact = '<a href="/smf/index.php?action=profile;u=youruid">yourname</a>';
+# IP address the ServerChecker application connects from
+$g_checker_ip = '69.39.224.55';
 
 define('SS_PAGE', 1);
 
