@@ -1,4 +1,10 @@
-.idea/
-serverstatus.php
+# backup files
 **~
-**.class
+**.bak
+# php files in main directory (used for specific configurations, usually has database details)
+*.php
+# maven artifacts
+ServerChecker/target
+# IDEA and PhpStorm files
+.idea/
+**.iml

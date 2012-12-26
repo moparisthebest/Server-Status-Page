@@ -37,7 +37,7 @@ you must create the relevant URL rewrite. In lighttpd, it looks like this:
     "^/serverstatus/([^/]*)\.png$" => "/serverstatus.php?action=image&server=$1",
     "^/serverstatus/([^/]*)/([^/]*)\.png$" => "/serverstatus.php?action=image&scale=$1&server=$2",
     )
-5. Compile and set up the (extremely poorly written) ServerChecker.java
+5. Compile and set up the ServerChecker java maven project (mvn package)
 to automatically approve and check the status of servers as a cronjob.
 6. Run it, I suggest Lighttpd+FastCGI.
 
@@ -52,7 +52,7 @@ code with everyone to improve it.  If you have any questions,
 contact me at admin@moparisthebest.com.  If you use the code, 
 I'd love to know, so drop me a line if you would.
 
-License: (full text in agpl-3.0.txt)
+License: (full text in LICENSE)
 ----------------------
 MoparScape.org server status page
 Copyright (C) 2011  Travis Burtrum (moparisthebest)
@@ -77,6 +77,5 @@ tbszip.php      : (LGPL) http://www.tinybutstrong.com/dl.php?f=tbszip.zip&s=2
 
 TODO:
 ----------------------
-1. Re-write ServerChecker.java completely. (partially complete, calls for re-factor of database structure)
-2. Embedded youtube support?
-3. You suggest it!  Or better yet send me a pull request or patch!
+1. Embedded youtube support?
+2. You suggest it!  Or better yet send me a pull request or patch!

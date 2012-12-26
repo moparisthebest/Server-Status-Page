@@ -46,7 +46,7 @@ require_once($g_source_dir . '/forums/smf.php');
 # do custom setup for above forum connector
 global $path_to_smf, $smf_admin_groups, $g_forum_url;
 $path_to_smf = '/path/to/smf';
-$smf_admin_groups = array(2, 63, 70);
+$smf_admin_groups = array(2); # 2 is global moderators, usually
 $g_forum_url = '/smf/index.php';
 
 # include theme
