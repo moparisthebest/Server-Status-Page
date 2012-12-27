@@ -86,7 +86,7 @@ function register2() {
     if ($edit) {
         $sql = 'UPDATE `servers` SET `name` = ?, `pic_url` = ?, `version` = ?, `info` = ? WHERE `uid` = ? LIMIT 1';
         $stmt = $g_mysqli->prepare($sql) or debug($g_mysqli->error);
-        $stmt->bind_param("ssisi", $name, $pic_url, $version, $message, $uid);
+        $stmt->bind_param("ssssi", $name, $pic_url, $version, $message, $uid);
         $success_msg = "Server $name succesfully updated.";
         $fail_msg = "Editing $name failed, did you actually change anything?";
     } else {
@@ -131,7 +131,7 @@ function register2() {
 				If you have problems with this, PM $g_admin_contact on the forums.";
         }
 
-        global $uname, $g_admin_contact, $g_checker_ip;
+        global $uname, $g_admin_contact;
         // don't bother with pic_url, they can edit it if they are sponsored
         $sql = 'INSERT INTO `toadd` (`uid`, `uname`, `name`, `ip`, `port`, `version`, `time`, `info`, `ipaddress`, `rs_name`, `rs_pass`, `key`, `verified`) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $stmt = $g_mysqli->prepare($sql) or debug($g_mysqli->error);
@@ -140,7 +140,7 @@ function register2() {
 Username: <strong class=\"highlight\">$rs_name</strong>\n<br />
 Password: <strong class=\"highlight\">$rs_pass</strong>\n<br />
 to make sure it is online, and if successful, it will be posted.  <br />
-You must register this username and password for me on your server and allow it to be logged into from the IP $g_checker_ip<br />
+You must register this username and password for me on your server and allow it to be logged into from the IP 69.39.224.55<br />
 The server will be deleted from the queue if not verified and logged into within 24 hours of posting.<br />" . $verify_msg;
         $fail_msg = 'Registration failed, PM ' . $g_admin_contact . ' on the forums to with details so he can fix it.';
     }
@@ -281,7 +281,7 @@ function echoPostForm($edit = null) {
 }
 
 function echoForm($name, $ip, $port, $version, $message, $pic_url, $edit = false) {
-    global $g_versions, $g_img_dir, $g_default_port;
+    global $g_versions, $g_img_dir;
     if (isset($name))
         censor($name);
     $preview_message = $message;
@@ -347,7 +347,7 @@ function echoForm($name, $ip, $port, $version, $message, $pic_url, $edit = false
         <tr>
             <td>Port</td>
 
-            <td><input type="text" name="port" value="<?php echo (isset($port) ? $port : $g_default_port); ?>"/></td>
+            <td><input type="text" name="port" value="<?php echo (isset($port) ? $port : '43594'); ?>"/></td>
         </tr>
             <?php
         }
@@ -750,9 +750,8 @@ function echoForm($name, $ip, $port, $version, $message, $pic_url, $edit = false
     <td>
         <textarea class="editor" name="message" rows="12" cols="60" onselect="storeCaret(this);"
                   onclick="storeCaret(this);" onkeyup=
-                "storeCaret(this);" onchange="storeCaret(this);" tabindex="2">
-            <?php echo $message; ?>
-        </textarea></td>
+                "storeCaret(this);" onchange="storeCaret(this);" tabindex="2"><?php echo $message; ?></textarea>
+    </td>
 </tr>
 
 <tr>

@@ -68,11 +68,12 @@ function verify() {
 
     if ($verified == 1) {
         writeToFile("already verified");
-        echo "You have already verified that you own this server.\n
-Your server will be checked by logging into it with the following credentials:\n
-Username: $rs_name\n
-Password: $rs_pass\n
-to make sure it is online, and if successful, it will be posted.";
+        echo "You have already verified that you own this server.
+Your server will be checked by logging into it with the following credentials:
+Username: $rs_name
+Password: $rs_pass
+to make sure it is online, and if successful, it will be posted.
+";
         return;
     }
 
@@ -85,11 +86,12 @@ to make sure it is online, and if successful, it will be posted.";
     $stmt->execute();
     if ($stmt->affected_rows == 1) {
         writeToFile("success verified");
-        echo "Congratulations, you have verified you own this IP.\n
-Your server will now be checked by logging into it with the following credentials:\n
-Username: $rs_name\n
-Password: $rs_pass\n
-to make sure it is online, and if successful, it will be posted.";
+        echo "Congratulations, you have verified you own this IP.
+Your server will now be checked by logging into it with the following credentials:
+Username: $rs_name
+Password: $rs_pass
+to make sure it is online, and if successful, it will be posted.
+";
     } else {
         writeToFile("strange failure");
         global $g_admin_contact;
@@ -101,9 +103,9 @@ to make sure it is online, and if successful, it will be posted.";
 }
 
 function writeToFile($message, $fname = 'verify_log', $mode = 'a') {
-    $fp = fopen($fname, $mode);
-    fwrite($fp, time() . ': ' . $message . "\n");
-    fclose($fp);
+    @$fp = fopen($fname, $mode);
+    @fwrite($fp, time() . ': ' . $message . "\n");
+    @fclose($fp);
 }
 
 ?>
