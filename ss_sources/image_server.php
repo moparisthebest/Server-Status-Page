@@ -60,7 +60,6 @@ function centerTtfString($image, $string, $font_size, $y, $font = null) {
 }
 
 function echoImage($online = -1, $text = 'Error!', $size_req = '') {
-    close_mysql();
     global $g_source_dir;
 
     if ($online == 1)
@@ -143,9 +142,10 @@ function gen_image() {
 
     // if there is no server in the database, forward to error
     if (!$stmt->fetch())
-        echoImage(-1, $server, $size_req);
+        $online = -1;
 
     $stmt->close();
+    close_mysql();
 
     // forward to the right page
     echoImage($online, $server, $size_req);
