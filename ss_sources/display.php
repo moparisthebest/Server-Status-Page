@@ -59,10 +59,11 @@ function display_table($online, $where, $num_servers = null) {
 
     $order_by .= " LIMIT $start, $num_per_page";
 
+    $sponsHadRows = false;
     if ($start == 0 && $online == 1 && !isset($_GET['sort']))
-        echoTable('Spons', "`sponsored` != '0'", "ORDER BY `sponsored` DESC, RAND() LIMIT 10");
+        $sponsHadRows = echoTable('Spons', "`sponsored` != '0'", "ORDER BY `sponsored` DESC, RAND() LIMIT 10");
 
-    echoTable('Other', $where, $order_by, $online, $start, $num_per_page, $num_servers);
+    echoTable('Other', $where, $order_by, $online, $start, $num_per_page, $num_servers, $sponsHadRows);
     close_mysql();
 }
 
@@ -77,37 +78,36 @@ function getPageIndex($where, $start, $num_per_page, $num_servers, $online) {
         $stmt->close();
     }
     //echo (sprintf('$num_servers: %s', $num_servers));
+    // if there are no results, return a special value (0) to indicate this, might want to hide table
+    if($num_servers === 0)
+        return $num_servers;
     // if we don't have enough for pages, just forget it
-    if ($num_servers <= $num_per_page)
+    elseif ($num_servers <= $num_per_page)
         return null;
     else
         return ss_constructPageIndex($_SERVER['PHP_SELF'], &$start, $num_servers, $num_per_page, $online);
 }
 
-function echoTable($class, $where, $order_by, $online = 1, $start = 0, $num_per_page = 30, $num_servers = null) {
+function echoTable($class, $where, $order_by, $online = 1, $start = 0, $num_per_page = 30, $num_servers = null, $sponsHadRows = true) {
+    $pageindex = getPageIndex($where, $start, $num_per_page, &$num_servers, $online);
+    // only echo table if there are results
+    if ($pageindex === 0 && $class == "Spons")
+        return false;
+    echoTableHeader($class, $num_servers, $pageindex, $online, $sponsHadRows);
     global $g_mysqli;
     //echo "SELECT `name`, `pic_url`, `uid`, `uname`, `online`, `ip`, `port`, `version`, `uptime`, `time`, `vote` FROM `servers` WHERE ".$where.' '.$order_by;
     $stmt = $g_mysqli->prepare("SELECT `name`, `pic_url`, `uid`, `uname`, `online`, `ip`, `port`, `version`, `uptime`, `time`, `vote` FROM `servers` WHERE " . $where . ' ' . $order_by) or debug($g_mysqli->error);
     $stmt->execute();
     // bind result variables
     $stmt->bind_result($name, $pic_url, $uid, $uname, $online, $ip, $port, $version, $uptime, $time, $votes);
-
-    // only echo table if there are results
-    if ($stmt->fetch()) {
-        $pageindex = getPageIndex($where, $start, $num_per_page, &$num_servers, $online);
-        echoTableHeader($class, $num_servers, $pageindex, $online);
-
-        $odd = false;
-        do {
-            echoTableRow($class, $name, $pic_url, $uid, $uname, $ip, $port, $version, $uptime, $time, $votes, $online, $odd);
-            $odd = !$odd;
-        } while ($stmt->fetch());
-
-        echoTableFooter();
-    } elseif ($class != "Spons")
-        echo "No servers yet, be the first!";
-
+    $odd = false;
+    while ($stmt->fetch()) {
+        echoTableRow($class, $name, $pic_url, $uid, $uname, $ip, $port, $version, $uptime, $time, $votes, $online, $odd);
+        $odd = !$odd;
+    }
     $stmt->close();
+    echoTableFooter();
+    return true;
 }
 
 function echoTableRow($class, $name, $pic_url, $uid, $uname, $ip, $port, $version, $uptime, $time, $votes, $online = 1, $odd = False) {
@@ -147,13 +147,15 @@ function echoTableRow($class, $name, $pic_url, $uid, $uname, $ip, $port, $versio
 <?php
 }
 
-function echoTableHeader($class, $num, $pageindex = null, $online = 1) {
+function echoTableHeader($class, $num, $pageindex = null, $online = 1, $sponsHadRows = true) {
     global $g_headers, $thispage, $g_img_dir;
 
     if ($class == "Spons")
         $caption = 'Sponsored Servers';
     elseif ($online == 2)
         $caption = 'Search Results'; // other
+    elseif (!$sponsHadRows)
+        $caption = 'Servers';
     else
         $caption = 'Other Servers';
 
