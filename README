@@ -22,6 +22,7 @@ Features:
 8. Can sort by all meaningful table columns.
 9. Uses MySQLi.
 10. Search powered by the fast Sphinx Search Server.
+11. Embedded Youtube support (if your forum bbcode parser supports it)
 
 How to make it work:
 ----------------------
@@ -77,5 +78,5 @@ tbszip.php      : (LGPL) http://www.tinybutstrong.com/dl.php?f=tbszip.zip&s=2
 
 TODO:
 ----------------------
-1. Embedded youtube support?
+1. Better database structure, 1 table for normal, banned, and toadd servers.
 2. You suggest it!  Or better yet send me a pull request or patch!

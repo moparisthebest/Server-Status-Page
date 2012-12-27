@@ -542,6 +542,18 @@ function echoForm($name, $ip, $port, $version, $message, $pic_url, $edit = false
     </option>
 </select><br/>
 <a href="javascript:void(0);" onclick=
+        "surroundText('[youtube]', '[/youtube]', document.forms.postmodify.message); return false;"><img onmouseover=
+                                                                                                         "bbc_highlight(this, true);"
+                                                                                                 onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);"
+                                                                                                 src=
+                                                                                                         "<?php echo $g_img_dir; ?>/bbc/youtube.gif"
+                                                                                                 width="23"
+                                                                                                 height="22"
+                                                                                                 alt="Youtube"
+                                                                                                 title="Youtube"
+                                                                                                 style=
+                                                                                                         "background-image: url(<?php echo $g_img_dir; ?>/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;"/></a>
+<a href="javascript:void(0);" onclick=
         "surroundText('[img]', '[/img]', document.forms.postmodify.message); return false;"><img onmouseover=
                                                                                                          "bbc_highlight(this, true);"
                                                                                                  onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);"
