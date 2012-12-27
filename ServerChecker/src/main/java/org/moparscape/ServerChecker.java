@@ -125,7 +125,7 @@ public class ServerChecker {
                 resolved.append(resolvedIP);
 
             // uncomment for testing without spamming packets
-            if (true) return returnClose(java.lang.Math.random() < 0.5D, resolvedIP, hostName, port, id, oldResolvedIP);
+            //if (true) return returnClose(java.lang.Math.random() < 0.5D, resolvedIP, hostName, port, id, oldResolvedIP);
 
             s = new Socket();
             s.setSoTimeout(timeout);
