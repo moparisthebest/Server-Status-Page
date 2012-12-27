@@ -290,7 +290,14 @@ function echoForm($name, $ip, $port, $version, $message, $pic_url, $edit = false
         $preview_message = bb2html($preview_message, true);
     }
     ?>
-<script type="text/javascript" src="script.js"></script>
+
+<script type="text/javascript" src="<?php echo $g_img_dir; ?>/bbc/script.js"></script>
+<script type="text/javascript">
+    function bbc_highlight(something, mode)
+    {
+        something.style.backgroundImage = "url(<?php echo $g_img_dir; ?>/bbc/" + (mode ? "bbc_hoverbg.gif)" : "bbc_bg.gif)");
+    }
+</script>
 <div class="post"<?php echo (isset($preview_message) ? '' : ' style="display: none;"'); ?>>
     <?php echo $preview_message; ?>
 </div>
@@ -781,7 +788,6 @@ function echoForm($name, $ip, $port, $version, $message, $pic_url, $edit = false
                onclick="return submitThisOnce(this);" accesskey="s"/> <input type=
                                                                                      "submit" name="preview"
                                                                              value="Preview Info" tabindex="4"
-                                                                             onclick="return event.ctrlKey || previewPost();"
                                                                              accesskey="p"/></td>
 </tr>
 
