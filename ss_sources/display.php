@@ -85,21 +85,29 @@ function getPageIndex($where, $start, $num_per_page, $num_servers, $online) {
 }
 
 function echoTable($class, $where, $order_by, $online = 1, $start = 0, $num_per_page = 30, $num_servers = null) {
-    $pageindex = getPageIndex($where, $start, $num_per_page, &$num_servers, $online);
-    echoTableHeader($class, $num_servers, $pageindex, $online);
     global $g_mysqli;
     //echo "SELECT `name`, `pic_url`, `uid`, `uname`, `online`, `ip`, `port`, `version`, `uptime`, `time`, `vote` FROM `servers` WHERE ".$where.' '.$order_by;
     $stmt = $g_mysqli->prepare("SELECT `name`, `pic_url`, `uid`, `uname`, `online`, `ip`, `port`, `version`, `uptime`, `time`, `vote` FROM `servers` WHERE " . $where . ' ' . $order_by) or debug($g_mysqli->error);
     $stmt->execute();
     // bind result variables
     $stmt->bind_result($name, $pic_url, $uid, $uname, $online, $ip, $port, $version, $uptime, $time, $votes);
-    $odd = false;
-    while ($stmt->fetch()) {
-        echoTableRow($class, $name, $pic_url, $uid, $uname, $ip, $port, $version, $uptime, $time, $votes, $online, $odd);
-        $odd = !$odd;
-    }
+
+    // only echo table if there are results
+    if ($stmt->fetch()) {
+        $pageindex = getPageIndex($where, $start, $num_per_page, &$num_servers, $online);
+        echoTableHeader($class, $num_servers, $pageindex, $online);
+
+        $odd = false;
+        do {
+            echoTableRow($class, $name, $pic_url, $uid, $uname, $ip, $port, $version, $uptime, $time, $votes, $online, $odd);
+            $odd = !$odd;
+        } while ($stmt->fetch());
+
+        echoTableFooter();
+    } elseif ($class != "Spons")
+        echo "No servers yet, be the first!";
+
     $stmt->close();
-    echoTableFooter();
 }
 
 function echoTableRow($class, $name, $pic_url, $uid, $uname, $ip, $port, $version, $uptime, $time, $votes, $online = 1, $odd = False) {
