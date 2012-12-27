@@ -65,7 +65,8 @@ function echoImage($online = -1, $text = 'Error!', $size_req = '') {
     if ($online == 1)
         $file = $g_source_dir . '/fonts/online.png';
     elseif ($online == 0)
-        $file = $g_source_dir . '/fonts/offline.png'; else
+        $file = $g_source_dir . '/fonts/offline.png';
+    else
         $file = $g_source_dir . '/fonts/error.png';
 
     $im = imagecreatefrompng($file);
@@ -76,6 +77,9 @@ function echoImage($online = -1, $text = 'Error!', $size_req = '') {
 //	centerImageString($im, $text, 5, 20);
     // size 12, y 35 can be used with <= 27 chars
     centerTtfString($im, $text, 11, 34);
+
+    // draw SERVER_NAME at bottom
+    centerTtfString($im, $_SERVER['SERVER_NAME'], 9, 82, $g_source_dir . '/fonts/arial_bold.ttf');
 
     if ($size_req != '') {
 
