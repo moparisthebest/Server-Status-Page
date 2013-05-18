@@ -60,7 +60,7 @@ function centerTtfString($image, $string, $font_size, $y, $font = null) {
 }
 
 function echoImage($online = -1, $text = 'Error!', $size_req = '') {
-    global $g_source_dir;
+    global $g_source_dir, $g_picture_banner;
 
     if ($online == 1)
         $file = $g_source_dir . '/fonts/online.png';
@@ -74,12 +74,15 @@ function echoImage($online = -1, $text = 'Error!', $size_req = '') {
 //	imagealphablending($im, true); // setting alpha blending on
 //	imagesavealpha($im, true); // save alphablending setting (important)
 
+    // Draw name up top
+    centerTtfString($im, $g_picture_banner, 12, 16);
+
 //	centerImageString($im, $text, 5, 20);
     // size 12, y 35 can be used with <= 27 chars
     centerTtfString($im, $text, 11, 34);
 
     // draw SERVER_NAME at bottom
-    centerTtfString($im, $_SERVER['SERVER_NAME'], 9, 82, $g_source_dir . '/fonts/arial_bold.ttf');
+    centerTtfString($im, $_SERVER['SERVER_NAME'], 9, 82);
 
     if ($size_req != '') {
 
