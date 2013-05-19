@@ -67,6 +67,7 @@ function ss_main(&$header, &$do_setup) {
         'register' => array('register.php', 'register'),
         'register2' => array('register.php', 'register2'),
         'verify' => array('verify.php', 'verify', false, false),
+        'check_ip' => array('check_ip.php', 'check_ip', false, false),
         'random' => array('random.php', 'random_page', false, false),
         'image' => array('image_server.php', 'gen_image', false, false),
         'zip' => array('tbszip.php', 'zip_sources', false, false),
