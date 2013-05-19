@@ -22,7 +22,7 @@ if (!defined('SS_PAGE'))
 
 // echos the header
 function echoHeader($action) {
-    global $thispage, $g_img_dir, $g_theme;
+    global $thispage, $g_img_dir, $g_theme, $g_extra_links;
     /*echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";*/
     ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -60,8 +60,12 @@ function echoHeader($action) {
             <li>
                 <a href="?action=register&amp;edit"<?php if ($action == 'register' && isset($_GET['edit'])) echo ' class="on"'; ?>>Edit
                     my Server</a></li>
-            <li><a href="?action=search"<?php if (strpos($action, 'search') !== false) echo ' class="on"'; ?>>Search</a>
-            </li>
+            <li><a href="?action=search"<?php if (strpos($action, 'search') !== false) echo ' class="on"'; ?>>Search</a></li>
+            <?php
+            if(is_array($g_extra_links))
+                foreach($g_extra_links as $text => $link)
+                    echo "<li><a href=\"$link\">$text</a></li>";
+            ?>
             <li><?php echoLogoutLink($thispage . '?' . $_SERVER['QUERY_STRING']); ?></li>
         </ul>
     </div>

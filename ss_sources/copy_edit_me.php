@@ -22,11 +22,11 @@ if (!defined('SS_PAGE'))
     die(highlight_file(__FILE__, true));
 
 # uncomment these to show all errors
-//ini_set('display_errors', 0);
+//ini_set('display_errors', 1);
 //error_reporting(E_ALL);
 
 # you need to set these regardless
-global $g_source_dir, $g_sql_host, $g_sql_user, $g_sql_pass, $g_sql_db, $g_versions, $g_default_port, $g_theme, $g_img_dir, $g_admin_contact, $g_checker_ip, $g_picture_banner;
+global $g_source_dir, $g_sql_host, $g_sql_user, $g_sql_pass, $g_sql_db, $g_versions, $g_default_port, $g_theme, $g_img_dir, $g_admin_contact, $g_checker_ip, $g_picture_banner, $g_extra_links;
 # path to ss_sources
 $g_source_dir = './ss_sources';
 $g_img_dir = './images';
@@ -42,6 +42,7 @@ $g_admin_contact = '<a href="/smf/index.php?action=profile;u=youruid">yourname</
 # IP address the ServerChecker application connects from
 $g_checker_ip = '69.39.224.55';
 $g_picture_banner = 'Server Status';
+$g_extra_links = array('Minecraft Server Status' => '//www.moparcraft.net/');
 
 define('SS_PAGE', 1);
 
