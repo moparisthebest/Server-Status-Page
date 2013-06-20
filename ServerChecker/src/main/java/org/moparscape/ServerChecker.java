@@ -20,18 +20,31 @@ package org.moparscape;
 
 import org.moparscape.result.ResultDelegator;
 
-import java.io.Closeable;
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ServerChecker {
+
+    // rudimentary and quick bad protocol detection
+    // format: port, String[]{responseStartsWith, [stringToSendFirst(optional)]}
+    private static final Map<Integer, String[]> badProtocols = Collections.unmodifiableMap(new HashMap<Integer, String[]>() {{
+        // HTTP
+        put(80, new String[]{"HTTP", "HEAD / HTTP/1.0\r\nHost: %s\r\n\r\n"});
+        put(8080, get(80));
+        // SSH
+        put(22, new String[]{"SSH"});
+        // FTP
+        put(21, new String[]{"220"});
+        // SMTP
+        put(25, new String[]{"220", "HELP\r\n"});
+        // POP
+        put(110, new String[]{"+OK"});
+    }});
 
     //private static final Map<String, String> ipToHostname = Collections.synchronizedMap(new HashMap<String, String>(1000));
     private static final Map<String, StringBuilder> ipToHostname = new HashMap<String, StringBuilder>(1000);
@@ -116,7 +129,7 @@ public class ServerChecker {
         Socket s = null;
         String resolvedIP = null;
         try {
-            InetSocketAddress addy = new InetSocketAddress(hostName, port);
+            final InetSocketAddress addy = new InetSocketAddress(hostName, port);
             if (addy.isUnresolved())
                 return false;
             resolvedIP = addy.getAddress().getHostAddress();
@@ -130,6 +143,33 @@ public class ServerChecker {
             s = new Socket();
             s.setSoTimeout(timeout);
             s.connect(addy, timeout);
+
+            // ensure we are NOT talking to a server with a blacklisted protocol
+            final String[] badProtocolDetection = badProtocols.get(port);
+            if (badProtocolDetection != null) {
+                Writer out = null;
+                BufferedReader in = null;
+                try {
+                    in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+
+                    if (badProtocolDetection.length > 1) {
+                        out = new OutputStreamWriter(s.getOutputStream());
+                        out.write(String.format(badProtocolDetection[1], hostName));
+                        out.flush();
+                    }
+
+                    final String result = in.readLine();
+                    //System.out.println("result: "+result);
+                    if (result != null && result.startsWith(badProtocolDetection[0]))// unsupported protocols
+                        return returnClose(false, resolvedIP, hostName, port, id, oldResolvedIP);
+                } catch (Throwable e) {
+                    //e.printStackTrace();
+                    // we do not want to return false here
+                } finally {
+                    tryClose(out);
+                    tryClose(in);
+                }
+            }
             /*
             DataOutputStream out = null;
             DataInputStream in = null;
@@ -147,7 +187,7 @@ public class ServerChecker {
             }
             */
             return returnClose(true, resolvedIP, hostName, port, id, oldResolvedIP);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             //e.printStackTrace();
             return returnClose(false, resolvedIP, hostName, port, id, oldResolvedIP);
         } finally {
@@ -173,6 +213,18 @@ public class ServerChecker {
     }
 
     public static void main(String[] args) {
+        /*
+        for (String server : new String[]{
+                "moparcraft.net:25565",     // minecraft
+                "www.moparcraft.net:54512", // nothing on this port
+                "www.moparcraft.net:80",    // HTTP
+                "www.moparcraft.net:22",    // SSH
+                "ftp.ietf.org:21",          // FTP
+                "test.smtp.org:25",         // SMTP
+        })
+            System.out.printf("validServer(%s): %b\n", server, validServer(8000, server.split(":")[0], Integer.parseInt(server.split(":")[1]), null, null, null));
+        if (true) return;
+        */
         if (args.length < 1) {
             printToLog("Usage: ServerChecker \"jdbc:mysql://localhost:3306/dbname?user=user&password=pass\" [debug]");
             return;
