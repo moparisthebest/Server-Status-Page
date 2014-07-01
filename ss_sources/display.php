@@ -67,7 +67,7 @@ function display_table($online, $where, $num_servers = null) {
     close_mysql();
 }
 
-function getPageIndex($where, $start, $num_per_page, $num_servers, $online) {
+function getPageIndex($where, $start, $num_per_page, &$num_servers, $online) {
     if ($num_servers == null) {
         global $g_mysqli;
         $stmt = $g_mysqli->prepare("SELECT COUNT(*) FROM `servers` WHERE " . $where) or debug($g_mysqli->error);
@@ -85,11 +85,11 @@ function getPageIndex($where, $start, $num_per_page, $num_servers, $online) {
     elseif ($num_servers <= $num_per_page)
         return null;
     else
-        return ss_constructPageIndex($_SERVER['PHP_SELF'], &$start, $num_servers, $num_per_page, $online);
+        return ss_constructPageIndex($_SERVER['PHP_SELF'], $start, $num_servers, $num_per_page, $online);
 }
 
 function echoTable($class, $where, $order_by, $online = 1, $start = 0, $num_per_page = 30, $num_servers = null, $sponsHadRows = true) {
-    $pageindex = getPageIndex($where, $start, $num_per_page, &$num_servers, $online);
+    $pageindex = getPageIndex($where, $start, $num_per_page, $num_servers, $online);
     // only echo table if there are results
     if ($pageindex === 0 && $class == "Spons")
         return false;

@@ -117,7 +117,7 @@ function register2() {
         $rs_pass = randString($g_allowed_key);
 
         $verified = 1;
-        if (!verifyIP($ip, &$resolved_ip, &$remote_ip)) {
+        if (!verifyIP($ip, $resolved_ip, $remote_ip)) {
             $verified = 0;
             global $thispage, $g_admin_contact;
             $verify_url = $thispage . "?action=verify&amp;server=$ip&amp;key=$key";

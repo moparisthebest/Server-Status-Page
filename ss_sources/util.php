@@ -118,7 +118,7 @@ function stripUnAllowed($s, $allowed) {
     return str_replace(' ', '', $s);
 }
 
-function verifyIP($hostname, $ip, $remote_ip) {
+function verifyIP($hostname, &$ip, &$remote_ip) {
     $ip = gethostbyname($hostname);
     $remote_ip = $_SERVER['REMOTE_ADDR'];
     return $ip == $remote_ip;

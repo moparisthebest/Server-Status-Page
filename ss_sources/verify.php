@@ -36,7 +36,7 @@ function verify() {
 
     writeToFile("server: $server key: $key");
 
-    if (verifyIP($server, &$ip, &$remote_ip)) {
+    if (verifyIP($server, $ip, $remote_ip)) {
         echo "Success: $server resolves to $ip, which matches your ip, $remote_ip.\n";
         writeToFile("Success: $server resolves to $ip, which matches your ip, $remote_ip.");
     } else {
